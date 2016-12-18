@@ -27,12 +27,21 @@ public class LinearTimerView extends View {
     private float degreesUpTillPreFill = 0;
 
     public LinearTimerView(Context context,
-                           AttributeSet attrs,
-                           int strokeWidthInDp,
+                           AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    /**
+     * Method to define the basic dimension and color of timer.
+     * @param strokeWidthInDp
+     * @param circleRadiusInDp
+     * @param initialColorHex
+     * @param finalColorHex
+     */
+    public void defineView(int strokeWidthInDp,
                            int circleRadiusInDp,
                            String initialColorHex,
                            String finalColorHex) {
-        super(context, attrs);
 
         int strokeWidthInPx = (int) convertDpIntoPixel(strokeWidthInDp);
         this.initialColorHex = initialColorHex;
@@ -44,7 +53,7 @@ public class LinearTimerView extends View {
         arcPaint.setStyle(Paint.Style.STROKE);
         arcPaint.setStrokeWidth(strokeWidthInPx);
 
-        // Define the size of the circle
+        // Define the size of the circle.
         rectF = new RectF(
                 strokeWidthInPx,
                 strokeWidthInPx,
