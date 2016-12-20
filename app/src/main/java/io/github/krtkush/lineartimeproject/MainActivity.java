@@ -2,6 +2,7 @@ package io.github.krtkush.lineartimeproject;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import io.github.krtkush.lineartimer.LinearTimer;
 import io.github.krtkush.lineartimer.LinearTimerView;
@@ -17,6 +18,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
+        (findViewById(R.id.startTimer)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startTimer();
+            }
+        });
+    }
+
+    private void startTimer() {
 
         linearTimer = new LinearTimer(50, 5, 270, "#D3D3D3", "#008000", linearTimerView);
         linearTimer.startTimer(0, 360, 60 * 1000);

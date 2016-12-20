@@ -17,8 +17,8 @@ public class LinearTimerView extends View {
     private Paint arcPaint;
     private RectF rectF;
 
-    private String initialColorHex = "#D3D3D3";
-    private String finalColorHex = "#008000";
+    private String initialColorHex;
+    private String finalColorHex;
     private int circleRadiusInDp;
 
     // The point from where the color-fill animation will start.
