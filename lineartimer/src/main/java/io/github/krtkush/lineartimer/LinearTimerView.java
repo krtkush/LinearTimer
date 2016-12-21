@@ -51,7 +51,7 @@ public class LinearTimerView extends View {
 
     /**
      * Method to define the basic dimension and color of timer.
-     * @param strokeWidthInDp Thickness of the circle.
+     * @param strokeWidthInDp Thickness of the circle boundary.
      * @param circleRadiusInDp Radius of the circle.
      * @param initialColorHex The color of the initial circle on top which the progress
      *                        arc will be drawn.
