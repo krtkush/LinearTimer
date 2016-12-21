@@ -15,7 +15,7 @@ public class ArcProgressAnimation extends Animation {
     private float endingAngle;
 
     public ArcProgressAnimation(LinearTimerView circle, int endingAngle) {
-        this.startingAngle = circle.getDegreesUpTillPreFill();
+        this.startingAngle = circle.getPreFillAngle();
         this.endingAngle = endingAngle;
         this.circle = circle;
     }

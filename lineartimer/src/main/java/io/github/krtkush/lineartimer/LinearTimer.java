@@ -36,10 +36,9 @@ public class LinearTimer {
      */
     public void startTimer(int preFillAngle, int endingAngle, long duration) {
 
-        linearTimerView.setDegreesUpTillPreFill(preFillAngle);
         linearTimerView.defineView(strokeWidth,
                 circleRadiusInDp, initialColorHex,
-                finalColorHex, startingPointInDegrees);
+                finalColorHex, startingPointInDegrees, preFillAngle);
 
         ArcProgressAnimation arcProgressAnimation =
                 new ArcProgressAnimation(linearTimerView, endingAngle);

@@ -24,7 +24,7 @@ public class LinearTimerView extends View {
     // The point from where the color-fill animation will start.
     private int startingPointInDegrees = 270;
     // The point up-till which user wants the circle to be pre-filled.
-    private float degreesUpTillPreFill = 0;
+    private float preFillAngle = 0;
 
     public LinearTimerView(Context context,
                            AttributeSet attrs) {
@@ -43,7 +43,7 @@ public class LinearTimerView extends View {
 
             // Green Arc (Arc with 360 angle) - This circle will be animated as time progresses.
             arcPaint.setColor(Color.parseColor(finalColorHex));
-            canvas.drawArc(rectF, startingPointInDegrees, degreesUpTillPreFill, false, arcPaint);
+            canvas.drawArc(rectF, startingPointInDegrees, preFillAngle, false, arcPaint);
         } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
@@ -56,18 +56,22 @@ public class LinearTimerView extends View {
      * @param initialColorHex The color of the initial circle on top which the progress
      *                        arc will be drawn.
      * @param finalColorHex The color of the progress arc.
+     * @param startingPointInDegrees The point from where the arc highlight should start
+     * @param preFillAngle The point up-till which user wants the circle to be pre-filled.
      */
     public void defineView(int strokeWidthInDp,
                            int circleRadiusInDp,
                            String initialColorHex,
                            String finalColorHex,
-                           int startingPointInDegrees) {
+                           int startingPointInDegrees,
+                           int preFillAngle) {
 
         int strokeWidthInPx = (int) convertDpIntoPixel(strokeWidthInDp);
         this.initialColorHex = initialColorHex;
         this.finalColorHex = finalColorHex;
         this.circleRadiusInDp = circleRadiusInDp;
         this.startingPointInDegrees = startingPointInDegrees;
+        this.preFillAngle = preFillAngle;
 
         arcPaint = new Paint();
         arcPaint.setAntiAlias(true);
@@ -86,17 +90,8 @@ public class LinearTimerView extends View {
      * Method to get the degrees up-till which the arc is already pre-filled.
      * @return
      */
-    public float getDegreesUpTillPreFill() {
-        return degreesUpTillPreFill;
-    }
-
-    /**
-     * Method to set the angle up-till witch the arc should already be drawn in
-     * secondary color.
-     * @param degreesUpTillPreFill
-     */
-    public void setDegreesUpTillPreFill(float degreesUpTillPreFill) {
-        this.degreesUpTillPreFill = degreesUpTillPreFill;
+    public float getPreFillAngle() {
+        return preFillAngle;
     }
 
     /**
