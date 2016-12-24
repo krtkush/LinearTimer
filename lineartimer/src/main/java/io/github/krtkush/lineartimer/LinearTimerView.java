@@ -80,32 +80,6 @@ public class LinearTimerView extends View {
     }
 
     /**
-     * Method to define the basic dimension and color of timer.
-     * @param strokeWidthInDp Thickness of the circle boundary.
-     * @param circleRadiusInDp Radius of the circle.
-     * @param initialColorHex The color of the initial circle on top which the progress
-     *                        arc will be drawn.
-     * @param finalColorHex The color of the progress arc.
-     * @param startingPointInDegrees The point from where the arc highlight should start
-     * @param preFillAngle The point up-till which user wants the circle to be pre-filled.
-     */
-    public void defineView(int strokeWidthInDp,
-                           int circleRadiusInDp,
-                           String initialColorHex,
-                           String finalColorHex,
-                           int startingPointInDegrees,
-                           int preFillAngle) {
-
-        //int strokeWidthInPx = (int) convertDpIntoPixel(strokeWidthInDp);
-        //this.initialColorHex = initialColorHex;
-        //this.progressColorHex = finalColorHex;
-        //this.circleRadiusInDp = circleRadiusInDp;
-        //this.startingPointInDegrees = startingPointInDegrees;
-        //this.preFillAngle = preFillAngle;
-
-    }
-
-    /**
      * Method to get the degrees up-till which the arc is already pre-filled.
      * @return
      */

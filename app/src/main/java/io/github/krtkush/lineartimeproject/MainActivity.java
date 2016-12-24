@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void startTimer() {
 
-        linearTimer = new LinearTimer(50, 5, 270, "#D3D3D3", "#008000", linearTimerView);
-        linearTimer.startTimer(0, 360, 60 * 1000);
+        linearTimer = new LinearTimer(linearTimerView);
+        linearTimer.startTimer(360, 60 * 1000);
     }
 }

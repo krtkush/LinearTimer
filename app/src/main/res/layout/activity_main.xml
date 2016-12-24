@@ -11,14 +11,14 @@
     <io.github.krtkush.lineartimer.LinearTimerView
         android:id="@+id/linearTimer"
         android:layout_centerInParent="true"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        app:radius="10dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:radius="20dp"
         app:strokeWidth="3dp"
         app:initialColor="@color/colorPrimary"
         app:progressColor="@color/colorAccent"
         app:startingPoint="270"
-        app:preFillPoint="0"/>
+        app:preFillPoint="90"/>
 
     <Button
         android:id="@+id/startTimer"
