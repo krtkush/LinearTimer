@@ -25,7 +25,7 @@ public class ArcProgressAnimation extends Animation {
 
         float finalAngle = startingAngle + ((endingAngle - startingAngle) * interpolatedTime);
 
-        circle.setDegreesUpTillPreFill(finalAngle);
+        circle.setPreFillAngle(finalAngle);
         circle.requestLayout();
     }
 }
