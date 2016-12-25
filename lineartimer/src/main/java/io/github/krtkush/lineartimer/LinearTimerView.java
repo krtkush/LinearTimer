@@ -5,8 +5,8 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 /**
@@ -18,8 +18,8 @@ public class LinearTimerView extends View {
     private Paint arcPaint;
     private RectF rectF;
 
-    private int initialColorHex;
-    private int progressColorHex;
+    private int initialColor;
+    private int progressColor;
     private int circleRadiusInDp;
     private int strokeWidthInDp;
 
@@ -35,14 +35,21 @@ public class LinearTimerView extends View {
 
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.LinearTimerView);
 
-        Log.i("test", typedArray.getString(R.styleable.LinearTimerView_radius));
-
-        this.circleRadiusInDp = (int) typedArray.getDimension(R.styleable.LinearTimerView_radius, 5);
-        this.strokeWidthInDp = (int) typedArray.getDimension(R.styleable.LinearTimerView_strokeWidth, 2);
-        this.initialColorHex = typedArray.getColor(R.styleable.LinearTimerView_initialColor, 0);
-        this.progressColorHex = typedArray.getColor(R.styleable.LinearTimerView_progressColor, 0);
-        this.startingPointInDegrees = typedArray.getInt(R.styleable.LinearTimerView_startingPoint, 270);
-        this.preFillAngle = typedArray.getInt(R.styleable.LinearTimerView_preFillPoint, 0);
+        // Retrieve the view attributes.
+        this.circleRadiusInDp =
+                (int) typedArray.getDimension(R.styleable.LinearTimerView_radius, 5);
+        this.strokeWidthInDp =
+                (int) typedArray.getDimension(R.styleable.LinearTimerView_strokeWidth, 2);
+        this.initialColor =
+                typedArray.getColor(R.styleable.LinearTimerView_initialColor,
+                        ContextCompat.getColor(getContext(), R.color.colorInitial));
+        this.progressColor =
+                typedArray.getColor(R.styleable.LinearTimerView_progressColor,
+                        ContextCompat.getColor(getContext(), R.color.colorProgress));
+        this.startingPointInDegrees =
+                typedArray.getInt(R.styleable.LinearTimerView_startingPoint, 270);
+        this.preFillAngle =
+                typedArray.getInt(R.styleable.LinearTimerView_preFillPoint, 0);
 
         // Define the size of the circle.
         rectF = new RectF(
@@ -67,12 +74,12 @@ public class LinearTimerView extends View {
 
         try {
             // Grey Circle - This circle will be there by default.
-            arcPaint.setColor(initialColorHex);
+            arcPaint.setColor(initialColor);
             canvas.drawCircle(rectF.centerX(), rectF.centerY(),
                     (int) convertDpIntoPixel(circleRadiusInDp), arcPaint);
 
             // Green Arc (Arc with 360 angle) - This circle will be animated as time progresses.
-            arcPaint.setColor(progressColorHex);
+            arcPaint.setColor(progressColor);
             canvas.drawArc(rectF, startingPointInDegrees, preFillAngle, false, arcPaint);
         } catch (NullPointerException ex) {
             ex.printStackTrace();

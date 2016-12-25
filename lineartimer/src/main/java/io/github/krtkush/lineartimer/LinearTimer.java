@@ -14,8 +14,8 @@ public class LinearTimer {
     }
 
     /**
-     * @param endingAngle Value between 0-360; The point up-till which the user wants.
-     * @param duration Values in milliseconds; Progress animation time period.
+     * @param endingAngle Value between 0-360; The point up-till which the user wants the progression.
+     * @param duration Value in milliseconds; Progress animation time period.
      */
     public void startTimer(int endingAngle, long duration) {
 

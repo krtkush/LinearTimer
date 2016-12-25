@@ -9,15 +9,15 @@ import android.view.animation.Transformation;
 
 public class ArcProgressAnimation extends Animation {
 
-    private LinearTimerView circle;
+    private LinearTimerView linearTimerView;
 
     private float startingAngle;
     private float endingAngle;
 
-    public ArcProgressAnimation(LinearTimerView circle, int endingAngle) {
-        this.startingAngle = circle.getPreFillAngle();
+    public ArcProgressAnimation(LinearTimerView linearTimerView, int endingAngle) {
+        this.startingAngle = linearTimerView.getPreFillAngle();
         this.endingAngle = endingAngle;
-        this.circle = circle;
+        this.linearTimerView = linearTimerView;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class ArcProgressAnimation extends Animation {
 
         float finalAngle = startingAngle + ((endingAngle - startingAngle) * interpolatedTime);
 
-        circle.setPreFillAngle(finalAngle);
-        circle.requestLayout();
+        linearTimerView.setPreFillAngle(finalAngle);
+        linearTimerView.requestLayout();
     }
 }
