@@ -18,17 +18,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
-        (findViewById(R.id.startTimer)).setOnClickListener(new View.OnClickListener() {
+        linearTimer = new LinearTimer(linearTimerView);
+
+        // Start the timer.
+        findViewById(R.id.startTimer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startTimer();
+                linearTimer.startTimer(360, 60 * 1000);
             }
         });
-    }
 
-    private void startTimer() {
+        // Reset the timer.
+        findViewById(R.id.stopTimer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                linearTimer.resetTimer();
+            }
+        });
 
-        linearTimer = new LinearTimer(linearTimerView);
-        linearTimer.startTimer(360, 60 * 1000);
+        // Restart the timer.
+        findViewById(R.id.restartTimer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                linearTimer.restartTimer();
+            }
+        });
     }
 }

@@ -33,7 +33,8 @@ public class LinearTimerView extends View {
                            AttributeSet attrs) {
         super(context, attrs);
 
-        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.LinearTimerView);
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs,
+                R.styleable.LinearTimerView);
 
         // Retrieve the view attributes.
         this.circleRadiusInDp =
@@ -100,8 +101,6 @@ public class LinearTimerView extends View {
 
     /**
      * Method to convert DPs into Pixels.
-     * @param dp
-     * @return
      */
     private float convertDpIntoPixel(float dp) {
         float scale = getResources().getDisplayMetrics().density;

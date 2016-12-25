@@ -7,6 +7,7 @@ package io.github.krtkush.lineartimer;
 public class LinearTimer {
 
     private LinearTimerView linearTimerView;
+    private ArcProgressAnimation arcProgressAnimation;
 
     public LinearTimer(LinearTimerView linearTimerView) {
 
@@ -19,9 +20,21 @@ public class LinearTimer {
      */
     public void startTimer(int endingAngle, long duration) {
 
-        ArcProgressAnimation arcProgressAnimation =
-                new ArcProgressAnimation(linearTimerView, endingAngle);
+        arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle);
         arcProgressAnimation.setDuration(duration);
         linearTimerView.startAnimation(arcProgressAnimation);
+    }
+
+    public void restartTimer() {
+        if(arcProgressAnimation != null) {
+            linearTimerView.setPreFillAngle(0);
+            arcProgressAnimation.cancel();
+            linearTimerView.startAnimation(arcProgressAnimation);
+        }
+    }
+
+    public void resetTimer() {
+        if(arcProgressAnimation != null)
+            arcProgressAnimation.cancel();
     }
 }
