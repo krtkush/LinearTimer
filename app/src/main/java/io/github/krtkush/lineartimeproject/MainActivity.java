@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Reset the timer.
-        findViewById(R.id.stopTimer).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.resetTimer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 linearTimer.resetTimer();
