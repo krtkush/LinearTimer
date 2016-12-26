@@ -25,14 +25,19 @@ public class LinearTimer {
         linearTimerView.startAnimation(arcProgressAnimation);
     }
 
+    /**
+     * Method to reset the timer to start angle and then start the progress again.
+     */
     public void restartTimer() {
         if(arcProgressAnimation != null) {
-            linearTimerView.setPreFillAngle(0);
             arcProgressAnimation.cancel();
             linearTimerView.startAnimation(arcProgressAnimation);
         }
     }
 
+    /**
+     * Method to bring the timer to start angle.
+     */
     public void resetTimer() {
         if(arcProgressAnimation != null)
             arcProgressAnimation.cancel();

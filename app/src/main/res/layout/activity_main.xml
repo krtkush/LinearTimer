@@ -16,7 +16,7 @@
         timer:radius="20dp"
         timer:strokeWidth="3dp"
         timer:startingPoint="270"
-        timer:preFillPoint="0"/>
+        timer:preFillPoint="90"/>
 
     <Button
         android:id="@+id/startTimer"
