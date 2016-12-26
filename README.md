@@ -56,3 +56,7 @@ After adding the view, here is how the View is initiaized and used -
      LinearTimer linearTimer = new LinearTimer(linearTimerView);
      
      linearTimer.startTimer(360, 60 * 1000);
+     
+**Contribution**
+
+Any kind of contribution will be appreciated; feel free to create a pull request or file issues on the issue tracker. If you'd like to contact me, you can reach me at kartikey92@gmail.com.
