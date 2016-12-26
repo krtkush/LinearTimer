@@ -36,7 +36,7 @@ public class LinearTimer {
     }
 
     /**
-     * Method to bring the timer to start angle.
+     * Method to reset the timer to start angle.
      */
     public void resetTimer() {
         if(arcProgressAnimation != null)
