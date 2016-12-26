@@ -1,6 +1,6 @@
 # Linear Timer
 
-Linear Timer is a custom view for Android that enables circular progress animation with respect to time.
+Linear Timer is a custom view for Android that enables circular progress animation with respect to given duration.
 
 **Screenshots**
 
@@ -20,7 +20,7 @@ In your root 'build.gradle' add the following -
     
  And, in your app 'build.gradle' add this - 
  
-    `compile 'com.github.krtkush:LinearTimerProject:v1.0.0'`
+    `compile 'com.github.krtkush:LinearTimer:v1.0.0'`
 under `dependencies`.
 
 **Usage**
