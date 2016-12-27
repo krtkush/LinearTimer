@@ -45,7 +45,7 @@ Here is a list of attributes available to toggle the LinearTimer's basic style -
 
 1. **radius** - The radius of the circle.
 2. **strokeWidth** - the thickness of the circle boundary.
-3. **startingPoint88** - The angle from where, in the timer, you want the animation to start. 270 is the 12 O'Clock position.
+3. **startingPoint** - The angle from where, in the timer, you want the animation to start. 270 is the 12 O'Clock position.
 4. **preFillPoint** - The angle up-till which you want the circle to be pre-filled.
 5. **initialColor** - The initial color of the circle. 
 6. **progressColor** - The color of the prgress arc that animates over the initial color. 
