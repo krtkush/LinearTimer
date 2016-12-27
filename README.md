@@ -8,7 +8,7 @@ Linear Timer is a custom view for Android that enables circular progress animati
 
 <img src="https://raw.githubusercontent.com/krtkush/LinearTimerProject/master/Screenshots/ssOne.png" width="200" height="350" />
 
-**Setup**
+## Setup
 
 Setup is pretty straight forward. 
 In your root 'build.gradle' add the following - 
@@ -20,12 +20,12 @@ In your root 'build.gradle' add the following -
       }
     }
     
- And, in your app 'build.gradle' add this - 
- 
-    `compile 'com.github.krtkush:LinearTimer:v1.0.0'`
+And, in your app 'build.gradle' add this - 
+
+        compile 'com.github.krtkush:LinearTimer:v1.0.0'
 under `dependencies`.
 
-**Usage**
+## Usage
 
 First, you need the following view in your layout XML - 
 
@@ -43,14 +43,14 @@ First, you need the following view in your layout XML -
       timer:preFillPoint="0" />
     ```
         
-Here is a list of attributes available to toggle the LinearTimer's looks -
+Here is a list of attributes available to toggle the LinearTimer's basic style -
 
-1. radius - The radius of the circle.
-2. strokeWidth - the thickness of the circle boundary.
-3. startingPoint - The angle from where, in the timer, you want the animation to start. 270 is the 12 O'Clock position.
-4. preFillPoint - The angle up-till which you want the circle to be pre-filled.
-5. initialColor - The initial color of the circle. 
-6. progressColor - The color of the prgress arc that animates over the initial color. 
+1. **radius** - The radius of the circle.
+2. **strokeWidth** - the thickness of the circle boundary.
+3. **startingPoint88** - The angle from where, in the timer, you want the animation to start. 270 is the 12 O'Clock position.
+4. **preFillPoint** - The angle up-till which you want the circle to be pre-filled.
+5. **initialColor** - The initial color of the circle. 
+6. **progressColor** - The color of the prgress arc that animates over the initial color. 
 
 After adding the view, here is how the View is initiaized and used -
 
@@ -59,6 +59,6 @@ After adding the view, here is how the View is initiaized and used -
      
      linearTimer.startTimer(360, 60 * 1000);
      
-**Contribution**
+## Contribution
 
 Any kind of contribution will be appreciated; feel free to create a pull request or file issues on the issue tracker. If you'd like to contact me, you can reach me at kartikey92[at]gmail.com.
