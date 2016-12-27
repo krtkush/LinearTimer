@@ -29,7 +29,6 @@ under `dependencies`.
 
 First, you need the following view in your layout XML - 
 
-    `
     xmlns:timer="http://schemas.android.com/apk/res-auto"
       
     <io.github.krtkush.lineartimer.LinearTimerView
@@ -41,7 +40,6 @@ First, you need the following view in your layout XML -
       timer:strokeWidth="3dp"
       timer:startingPoint="270"
       timer:preFillPoint="0" />
-    `
         
 Here is a list of attributes available to toggle the LinearTimer's basic style -
 
