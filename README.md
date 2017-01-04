@@ -29,17 +29,17 @@ under `dependencies`.
 
 First, you need the following view in your layout XML - 
 
-    xmlns:timer="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
       
     <io.github.krtkush.lineartimer.LinearTimerView
       android:id="@+id/linearTimer"
       android:layout_centerInParent="true"
       android:layout_width="120dp"
       android:layout_height="120dp"
-      timer:radius="20dp"
-      timer:strokeWidth="3dp"
-      timer:startingPoint="270"
-      timer:preFillPoint="0" />
+      app:radius="20dp"
+      app:strokeWidth="3dp"
+      app:startingPoint="270"
+      app:preFillPoint="0" />
         
 Here is a list of attributes available to toggle the LinearTimer's basic style -
 
@@ -55,7 +55,23 @@ After adding the view, here is how the View is initiaized and used -
      LinearTimerView linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
      LinearTimer linearTimer = new LinearTimer(linearTimerView);
      
+     /** 
+      * Start the timer. 
+      *
+      * First argument represents the angle at which the animation should finish.
+      * Second argument represents the duration of the animation in milliseconds. 
+      */
      linearTimer.startTimer(360, 60 * 1000);
+     
+     /**
+      * Reset the timer to the start angle and then start the progress again.
+      */
+     linearTimer.restartTimer();
+     
+      /**
+      * Method to reset the timer to start angle.
+      */
+     linearTimer.resetTimer();
      
 ## Contribution
 
