@@ -20,9 +20,12 @@ public class LinearTimer {
      */
     public void startTimer(int endingAngle, long duration) {
 
-        arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle);
-        arcProgressAnimation.setDuration(duration);
-        linearTimerView.startAnimation(arcProgressAnimation);
+        if(arcProgressAnimation == null) {
+
+            arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle);
+            arcProgressAnimation.setDuration(duration);
+            linearTimerView.startAnimation(arcProgressAnimation);
+        }
     }
 
     /**
@@ -39,7 +42,9 @@ public class LinearTimer {
      * Method to reset the timer to start angle.
      */
     public void resetTimer() {
-        if(arcProgressAnimation != null)
+        if(arcProgressAnimation != null) {
             arcProgressAnimation.cancel();
+            arcProgressAnimation = null;
+        }
     }
 }
