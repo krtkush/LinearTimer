@@ -2,7 +2,7 @@
 
 Linear Timer is a custom view for Android that enables circular progress animation with respect to given duration.
 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Linear%20Timer-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/4959)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Linear%20Timer-brightgreen.svg?style=social)](https://android-arsenal.com/details/1/4959)
 
 **If you're using this library, please let me know; I'll feature your app in this readme.**
 
