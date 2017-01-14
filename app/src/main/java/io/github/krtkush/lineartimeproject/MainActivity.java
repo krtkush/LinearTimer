@@ -43,5 +43,21 @@ public class MainActivity extends AppCompatActivity {
                 linearTimer.restartTimer();
             }
         });
+
+        // Pause the timer
+        findViewById(R.id.pauseTimer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                linearTimer.pauseTimer();
+            }
+        });
+
+        // Resume the timer
+        findViewById(R.id.resumeTimer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                linearTimer.resumeTimer();
+            }
+        });
     }
 }

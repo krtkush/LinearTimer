@@ -23,7 +23,7 @@ public class LinearTimerView extends View {
     private int circleRadiusInDp;
 
     // The point from where the color-fill animation will start.
-    private int startingPointInDegrees = 270;
+    private int startingAngle = 270;
 
     // The point up-till which user wants the circle to be pre-filled.
     private float preFillAngle = 0;
@@ -46,7 +46,7 @@ public class LinearTimerView extends View {
         this.progressColor =
                 typedArray.getColor(R.styleable.LinearTimerView_progressColor,
                         ContextCompat.getColor(getContext(), R.color.colorProgress));
-        this.startingPointInDegrees =
+        this.startingAngle =
                 typedArray.getInt(R.styleable.LinearTimerView_startingPoint, 270);
         this.preFillAngle =
                 typedArray.getInt(R.styleable.LinearTimerView_preFillPoint, 0);
@@ -80,7 +80,7 @@ public class LinearTimerView extends View {
 
             // Green Arc (Arc with 360 angle) - This circle will be animated as time progresses.
             arcPaint.setColor(progressColor);
-            canvas.drawArc(rectF, startingPointInDegrees, preFillAngle, false, arcPaint);
+            canvas.drawArc(rectF, startingAngle, preFillAngle, false, arcPaint);
         } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
@@ -96,6 +96,18 @@ public class LinearTimerView extends View {
 
     public void setPreFillAngle(float preFillAngle) {
         this.preFillAngle = preFillAngle;
+    }
+
+    /**
+     * Method to get the starting point of the angle
+     * @return
+     */
+    public int getStartingPoint() {
+        return startingAngle;
+    }
+
+    public void setStartingPoint(int startingPointInDegrees) {
+        this.startingAngle = startingPointInDegrees;
     }
 
     /**

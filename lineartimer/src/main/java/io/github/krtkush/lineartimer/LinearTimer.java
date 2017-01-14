@@ -47,4 +47,12 @@ public class LinearTimer {
             arcProgressAnimation = null;
         }
     }
+
+    public void pauseTimer() {
+        arcProgressAnimation.pauseAnimation();
+    }
+
+    public void resumeTimer() {
+        arcProgressAnimation.resumeAnimation();
+    }
 }
