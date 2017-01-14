@@ -42,21 +42,4 @@
         android:layout_centerInParent="true"
         android:text="Restart"/>
 
-    <Button
-        android:id="@+id/pauseTimer"
-        android:layout_below="@+id/restartTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Pause"/>
-
-    <Button
-        android:id="@+id/resumeTimer"
-        android:layout_below="@+id/pauseTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Resume"/>
-
-
 </RelativeLayout>

@@ -1,6 +1,5 @@
 package io.github.krtkush.lineartimer;
 
-import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
@@ -26,21 +25,9 @@ public class ArcProgressAnimation extends Animation {
     @Override
     protected void applyTransformation(float interpolatedTime, Transformation transformation) {
 
-        if(isPause) {
-            Log.i("Animation", "is paused");
-        } else {
-            float finalAngle = startingAngle + ((endingAngle - startingAngle) * interpolatedTime);
+        float finalAngle = startingAngle + ((endingAngle - startingAngle) * interpolatedTime);
 
-            linearTimerView.setPreFillAngle(finalAngle);
-            linearTimerView.requestLayout();
-        }
-    }
-
-    public void pauseAnimation() {
-        isPause = true;
-    }
-
-    public void resumeAnimation() {
-        isPause = false;
+        linearTimerView.setPreFillAngle(finalAngle);
+        linearTimerView.requestLayout();
     }
 }
