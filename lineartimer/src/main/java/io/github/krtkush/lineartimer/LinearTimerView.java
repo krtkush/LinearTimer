@@ -21,7 +21,6 @@ public class LinearTimerView extends View {
     private int initialColor;
     private int progressColor;
     private int circleRadiusInDp;
-    private int strokeWidthInDp;
 
     // The point from where the color-fill animation will start.
     private int startingPointInDegrees = 270;
@@ -39,7 +38,7 @@ public class LinearTimerView extends View {
         // Retrieve the view attributes.
         this.circleRadiusInDp =
                 (int) typedArray.getDimension(R.styleable.LinearTimerView_radius, 5);
-        this.strokeWidthInDp =
+        int strokeWidthInDp =
                 (int) typedArray.getDimension(R.styleable.LinearTimerView_strokeWidth, 2);
         this.initialColor =
                 typedArray.getColor(R.styleable.LinearTimerView_initialColor,
