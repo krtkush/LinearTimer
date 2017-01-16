@@ -1,17 +1,34 @@
 package io.github.krtkush.lineartimer;
 
+import android.animation.ObjectAnimator;
+import android.view.animation.AccelerateDecelerateInterpolator;
+
 /**
  * Created by kartikeykushwaha on 18/12/16.
  */
 
 public class LinearTimer {
 
+    public static final int CLOCK_WISE_PROGRESSION = 0;
+    public static final int COUNTER_CLOCK_WISE_PROGRESSION = 1;
+
     private LinearTimerView linearTimerView;
     private ArcProgressAnimation arcProgressAnimation;
 
-    public LinearTimer(LinearTimerView linearTimerView) {
+    public LinearTimer(LinearTimerView linearTimerView, int progressDirection) {
 
         this.linearTimerView = linearTimerView;
+
+        // If the user wants to show the progress in counter clock wise manner,
+        // we flip the view on its Y-Axis and let it function as is.
+        if(progressDirection == COUNTER_CLOCK_WISE_PROGRESSION) {
+
+            ObjectAnimator objectAnimator = ObjectAnimator
+                    .ofFloat(linearTimerView, "rotationY", 0.0f, 180f);
+            objectAnimator.setDuration(0);
+            objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+            objectAnimator.start();
+        }
     }
 
     /**
@@ -45,6 +62,8 @@ public class LinearTimer {
         if(arcProgressAnimation != null) {
             arcProgressAnimation.cancel();
             arcProgressAnimation = null;
+        } else {
+            linearTimerView.invalidate();
         }
     }
 }

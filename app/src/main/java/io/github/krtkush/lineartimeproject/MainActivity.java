@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
-        linearTimer = new LinearTimer(linearTimerView);
+        linearTimer = new LinearTimer(linearTimerView, LinearTimer.COUNTER_CLOCK_WISE_PROGRESSION);
 
         // Start the timer.
         findViewById(R.id.startTimer).setOnClickListener(new View.OnClickListener() {
