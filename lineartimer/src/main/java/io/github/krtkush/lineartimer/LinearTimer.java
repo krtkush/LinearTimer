@@ -15,6 +15,8 @@ public class LinearTimer implements ArcProgressAnimation.AnimationListener {
     private LinearTimerView linearTimerView;
     private ArcProgressAnimation arcProgressAnimation;
 
+    private AnimationListener animationListener;
+
     public LinearTimer(LinearTimerView linearTimerView, int progressDirection) {
 
         this.linearTimerView = linearTimerView;
@@ -28,6 +30,24 @@ public class LinearTimer implements ArcProgressAnimation.AnimationListener {
             objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
             objectAnimator.start();
         }
+    }
+
+    public LinearTimer(LinearTimerView linearTimerView, int progressDirection,
+                       AnimationListener animationListener) {
+
+        this.linearTimerView = linearTimerView;
+
+        // If the user wants to show the progress in counter clock wise manner,
+        // we flip the view on its Y-Axis and let it function as is.
+        if(progressDirection == COUNTER_CLOCK_WISE_PROGRESSION) {
+
+            ObjectAnimator objectAnimator = ObjectAnimator
+                    .ofFloat(linearTimerView, "rotationY", 0.0f, 180f);
+            objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+            objectAnimator.start();
+        }
+
+        this.animationListener = animationListener;
     }
 
     /**
@@ -56,6 +76,10 @@ public class LinearTimer implements ArcProgressAnimation.AnimationListener {
 
     @Override
     public void animationComplete() {
+        animationListener.animationComplete();
+    }
 
+    public interface AnimationListener{
+        void animationComplete();
     }
 }

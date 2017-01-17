@@ -2,12 +2,13 @@ package io.github.krtkush.lineartimeproject;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import io.github.krtkush.lineartimer.LinearTimer;
 import io.github.krtkush.lineartimer.LinearTimerView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LinearTimer.AnimationListener{
 
     LinearTimer linearTimer;
     LinearTimerView linearTimerView;
@@ -18,7 +19,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
-        linearTimer = new LinearTimer(linearTimerView, LinearTimer.COUNTER_CLOCK_WISE_PROGRESSION);
+        linearTimer = new LinearTimer(linearTimerView, LinearTimer.COUNTER_CLOCK_WISE_PROGRESSION,
+                this);
 
         // Start the timer.
         findViewById(R.id.startTimer).setOnClickListener(new View.OnClickListener() {
@@ -35,5 +37,10 @@ public class MainActivity extends AppCompatActivity {
                 linearTimer.restartTimer();
             }
         });
+    }
+
+    @Override
+    public void animationComplete() {
+        Log.i("Animation complete.", " ");
     }
 }
