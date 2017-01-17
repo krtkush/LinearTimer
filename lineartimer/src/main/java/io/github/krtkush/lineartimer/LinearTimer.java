@@ -7,7 +7,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
  * Created by kartikeykushwaha on 18/12/16.
  */
 
-public class LinearTimer {
+public class LinearTimer implements ArcProgressAnimation.AnimationListener {
 
     public static final int CLOCK_WISE_PROGRESSION = 0;
     public static final int COUNTER_CLOCK_WISE_PROGRESSION = 1;
@@ -39,7 +39,7 @@ public class LinearTimer {
 
         if(arcProgressAnimation == null) {
 
-            arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle);
+            arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle, this);
             arcProgressAnimation.setDuration(duration);
             linearTimerView.startAnimation(arcProgressAnimation);
         }
@@ -55,15 +55,8 @@ public class LinearTimer {
         }
     }
 
-    /**
-     * Method to reset the timer to start angle.
-     */
-    public void resetTimer() {
-        if(arcProgressAnimation != null) {
-            arcProgressAnimation.cancel();
-            arcProgressAnimation = null;
-        } else {
-            linearTimerView.invalidate();
-        }
+    @Override
+    public void animationComplete() {
+
     }
 }

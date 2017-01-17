@@ -24,15 +24,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.startTimer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                linearTimer.startTimer(360, 60 * 1000);
-            }
-        });
-
-        // Reset the timer.
-        findViewById(R.id.resetTimer).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                linearTimer.resetTimer();
+                linearTimer.startTimer(360, 10 * 1000);
             }
         });
 

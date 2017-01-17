@@ -27,16 +27,8 @@
         android:text="Start"/>
 
     <Button
-        android:id="@+id/resetTimer"
-        android:layout_below="@+id/startTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Reset"/>
-
-    <Button
         android:id="@+id/restartTimer"
-        android:layout_below="@+id/resetTimer"
+        android:layout_below="@+id/startTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
