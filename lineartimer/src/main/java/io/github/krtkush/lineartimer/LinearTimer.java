@@ -25,7 +25,6 @@ public class LinearTimer implements ArcProgressAnimation.AnimationListener {
 
             ObjectAnimator objectAnimator = ObjectAnimator
                     .ofFloat(linearTimerView, "rotationY", 0.0f, 180f);
-            objectAnimator.setDuration(0);
             objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
             objectAnimator.start();
         }
