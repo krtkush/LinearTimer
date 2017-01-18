@@ -57,7 +57,6 @@ public class LinearTimer implements ArcProgressAnimation.AnimationListener {
     public void startTimer(int endingAngle, long duration) {
 
         if(arcProgressAnimation == null) {
-
             arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle, this);
             arcProgressAnimation.setDuration(duration);
             linearTimerView.startAnimation(arcProgressAnimation);
@@ -76,10 +75,27 @@ public class LinearTimer implements ArcProgressAnimation.AnimationListener {
 
     @Override
     public void animationComplete() {
-        animationListener.animationComplete();
+        try {
+            animationCompleteListenerCheck();
+        } catch (AnimationListenerMissingException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public interface AnimationListener {
         void animationComplete();
+    }
+
+    /**
+     * This method checks whether the animationListener is valid or not.
+     * @throws AnimationListenerMissingException This exception is thrown if the user fails
+     * to provide correct reference to a class (Activity/ Fragment)
+     * which has AnimationListener implemented.
+     */
+    private void animationCompleteListenerCheck() throws AnimationListenerMissingException {
+        if(animationListener == null)
+            throw new AnimationListenerMissingException("AnimationListener not found.");
+        else
+            animationListener.animationComplete();
     }
 }
