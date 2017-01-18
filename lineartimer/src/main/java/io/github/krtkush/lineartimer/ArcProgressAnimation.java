@@ -37,7 +37,7 @@ public class ArcProgressAnimation extends Animation {
     }
 
     /**
-     * Interface to inform the implementing class that tha animation has finished.
+     * Interface to inform the implementing class that the animation has finished.
      */
     public interface AnimationListener {
         void animationComplete();
