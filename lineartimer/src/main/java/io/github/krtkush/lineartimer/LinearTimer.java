@@ -7,7 +7,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
  * Created by kartikeykushwaha on 18/12/16.
  */
 
-public class LinearTimer implements ArcProgressAnimation.AnimationListener {
+public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
     public static final int CLOCK_WISE_PROGRESSION = 0;
     public static final int COUNTER_CLOCK_WISE_PROGRESSION = 1;
@@ -15,7 +15,7 @@ public class LinearTimer implements ArcProgressAnimation.AnimationListener {
     private LinearTimerView linearTimerView;
     private ArcProgressAnimation arcProgressAnimation;
 
-    private AnimationListener animationListener;
+    private TimerListener timerListener;
 
     public LinearTimer(LinearTimerView linearTimerView, int progressDirection) {
 
@@ -33,7 +33,7 @@ public class LinearTimer implements ArcProgressAnimation.AnimationListener {
     }
 
     public LinearTimer(LinearTimerView linearTimerView, int progressDirection,
-                       AnimationListener animationListener) {
+                       TimerListener timerListener) {
 
         this.linearTimerView = linearTimerView;
 
@@ -47,7 +47,7 @@ public class LinearTimer implements ArcProgressAnimation.AnimationListener {
             objectAnimator.start();
         }
 
-        this.animationListener = animationListener;
+        this.timerListener = timerListener;
     }
 
     /**
@@ -76,26 +76,27 @@ public class LinearTimer implements ArcProgressAnimation.AnimationListener {
     @Override
     public void animationComplete() {
         try {
-            animationCompleteListenerCheck();
+            if(timerListenerCheck())
+                timerListener.animationComplete();
         } catch (AnimationListenerMissingException ex) {
             ex.printStackTrace();
         }
     }
 
-    public interface AnimationListener {
+    public interface TimerListener {
         void animationComplete();
     }
 
     /**
-     * This method checks whether the animationListener is valid or not.
+     * This method checks whether the timerListener is valid or not.
      * @throws AnimationListenerMissingException This exception is thrown if the user fails
      * to provide correct reference to a class (Activity/ Fragment)
-     * which has AnimationListener implemented.
+     * which has TimerListener implemented.
      */
-    private void animationCompleteListenerCheck() throws AnimationListenerMissingException {
-        if(animationListener == null)
-            throw new AnimationListenerMissingException("AnimationListener not found.");
+    private boolean timerListenerCheck() throws AnimationListenerMissingException {
+        if(timerListener == null)
+            throw new AnimationListenerMissingException("TimerListener not found.");
         else
-            animationListener.animationComplete();
+            return true;
     }
 }

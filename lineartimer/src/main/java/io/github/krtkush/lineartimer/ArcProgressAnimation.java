@@ -14,14 +14,14 @@ public class ArcProgressAnimation extends Animation {
     private float startingAngle;
     private float endingAngle;
 
-    private AnimationListener animationListener;
+    private TimerListener timerListener;
 
     public ArcProgressAnimation(LinearTimerView linearTimerView, int endingAngle,
-                                AnimationListener animationListener) {
+                                TimerListener timerListener) {
         this.startingAngle = linearTimerView.getPreFillAngle();
         this.endingAngle = endingAngle;
         this.linearTimerView = linearTimerView;
-        this.animationListener = animationListener;
+        this.timerListener = timerListener;
     }
 
     @Override
@@ -33,13 +33,13 @@ public class ArcProgressAnimation extends Animation {
         linearTimerView.requestLayout();
 
         if(interpolatedTime == 1.0)
-            animationListener.animationComplete();
+            timerListener.animationComplete();
     }
 
     /**
      * Interface to inform the implementing class that the animation has finished.
      */
-    public interface AnimationListener {
+    public interface TimerListener {
         void animationComplete();
     }
 }
