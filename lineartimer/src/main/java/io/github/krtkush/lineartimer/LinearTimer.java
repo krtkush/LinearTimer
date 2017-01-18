@@ -17,23 +17,36 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
     private TimerListener timerListener;
 
+    /**
+     * Overloaded constructor for the case when user does not want to implement the
+     * listener interface.
+     * @param linearTimerView
+     * @param progressDirection
+     */
     public LinearTimer(LinearTimerView linearTimerView, int progressDirection) {
 
-        this.linearTimerView = linearTimerView;
-
-        // If the user wants to show the progress in counter clock wise manner,
-        // we flip the view on its Y-Axis and let it function as is.
-        if(progressDirection == COUNTER_CLOCK_WISE_PROGRESSION) {
-
-            ObjectAnimator objectAnimator = ObjectAnimator
-                    .ofFloat(linearTimerView, "rotationOnYAxis", 0.0f, 180f);
-            objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-            objectAnimator.start();
-        }
+        initiateTimer(linearTimerView, progressDirection);
     }
 
+    /**
+     * Overloaded constructor for the case when user has implemented the listener interface.
+     * @param linearTimerView
+     * @param progressDirection
+     * @param timerListener
+     */
     public LinearTimer(LinearTimerView linearTimerView, int progressDirection,
                        TimerListener timerListener) {
+
+        initiateTimer(linearTimerView, progressDirection);
+        this.timerListener = timerListener;
+    }
+
+    /**
+     * Method that contains the common code needed initiate the timer.
+     * @param linearTimerView
+     * @param progressDirection
+     */
+    private void initiateTimer(LinearTimerView linearTimerView, int progressDirection) {
 
         this.linearTimerView = linearTimerView;
 
@@ -46,8 +59,6 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
             objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
             objectAnimator.start();
         }
-
-        this.timerListener = timerListener;
     }
 
     /**
@@ -90,12 +101,12 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     /**
      * This method checks whether the timerListener is valid or not.
      * @throws AnimationListenerMissingException This exception is thrown if the user fails
-     * to provide correct reference to a class (Activity/ Fragment)
-     * which has TimerListener implemented.
+     * to provide correct reference to the class which has implemented TimerListener.
      */
     private boolean timerListenerCheck() throws AnimationListenerMissingException {
         if(timerListener == null)
-            throw new AnimationListenerMissingException("TimerListener not found.");
+            throw new AnimationListenerMissingException("TimerListener not found. " +
+                    "Make sure TimerListener is implemented.");
         else
             return true;
     }
