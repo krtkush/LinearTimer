@@ -32,12 +32,14 @@ public class ArcProgressAnimation extends Animation {
         linearTimerView.setPreFillAngle(finalAngle);
         linearTimerView.requestLayout();
 
+        // If interpolatedTime = 0.0 -> Animation has just started.
+        // If interpolatedTime = 1.0 -> Animation has completed.
         if(interpolatedTime == 1.0)
             timerListener.animationComplete();
     }
 
     /**
-     * Interface to inform the implementing class that the animation has finished.
+     * Interface to inform the implementing class about events wrt timer.
      */
     public interface TimerListener {
         void animationComplete();

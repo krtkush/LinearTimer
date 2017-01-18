@@ -94,6 +94,9 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         }
     }
 
+    /**
+     * Interface to inform the implementing class about events wrt timer.
+     */
     public interface TimerListener {
         void animationComplete();
     }
