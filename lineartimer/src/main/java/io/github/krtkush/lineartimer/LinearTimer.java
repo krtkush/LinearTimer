@@ -26,7 +26,7 @@ public class LinearTimer implements ArcProgressAnimation.AnimationListener {
         if(progressDirection == COUNTER_CLOCK_WISE_PROGRESSION) {
 
             ObjectAnimator objectAnimator = ObjectAnimator
-                    .ofFloat(linearTimerView, "rotationY", 0.0f, 180f);
+                    .ofFloat(linearTimerView, "rotationOnYAxis", 0.0f, 180f);
             objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
             objectAnimator.start();
         }
@@ -79,7 +79,7 @@ public class LinearTimer implements ArcProgressAnimation.AnimationListener {
         animationListener.animationComplete();
     }
 
-    public interface AnimationListener{
+    public interface AnimationListener {
         void animationComplete();
     }
 }

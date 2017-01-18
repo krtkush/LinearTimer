@@ -8,7 +8,7 @@ import android.view.View;
 import io.github.krtkush.lineartimer.LinearTimer;
 import io.github.krtkush.lineartimer.LinearTimerView;
 
-public class MainActivity extends AppCompatActivity implements LinearTimer.AnimationListener{
+public class MainActivity extends AppCompatActivity implements LinearTimer.AnimationListener {
 
     LinearTimer linearTimer;
     LinearTimerView linearTimerView;
@@ -41,6 +41,6 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Anima
 
     @Override
     public void animationComplete() {
-        Log.i("Animation complete.", " ");
+        Log.i("Animation", "complete");
     }
 }
