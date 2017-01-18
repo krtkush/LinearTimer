@@ -10,15 +10,14 @@ import io.github.krtkush.lineartimer.LinearTimerView;
 
 public class MainActivity extends AppCompatActivity implements LinearTimer.TimerListener {
 
-    LinearTimer linearTimer;
-    LinearTimerView linearTimerView;
+    private LinearTimer linearTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
+        LinearTimerView linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
         linearTimer = new LinearTimer(linearTimerView, LinearTimer.COUNTER_CLOCK_WISE_PROGRESSION);
 
         // Start the timer.
