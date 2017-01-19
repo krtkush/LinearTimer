@@ -89,7 +89,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         try {
             if(timerListenerCheck())
                 timerListener.animationComplete();
-        } catch (AnimationListenerMissingException ex) {
+        } catch (TimerListenerMissingException ex) {
             ex.printStackTrace();
         }
     }
@@ -103,12 +103,12 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
     /**
      * This method checks whether the timerListener is valid or not.
-     * @throws AnimationListenerMissingException This exception is thrown if the user fails
+     * @throws TimerListenerMissingException This exception is thrown if the user fails
      * to provide correct reference to the class which has implemented TimerListener.
      */
-    private boolean timerListenerCheck() throws AnimationListenerMissingException {
+    private boolean timerListenerCheck() throws TimerListenerMissingException {
         if(timerListener == null)
-            throw new AnimationListenerMissingException("TimerListener not found. " +
+            throw new TimerListenerMissingException("TimerListener not found. " +
                     "Make sure TimerListener is implemented.");
         else
             return true;
