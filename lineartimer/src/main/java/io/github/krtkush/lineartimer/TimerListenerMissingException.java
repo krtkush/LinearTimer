@@ -4,9 +4,9 @@ package io.github.krtkush.lineartimer;
  * Created by kartikeykushwaha on 18/01/17.
  */
 
-public class AnimationListenerMissingException extends Exception {
+public class TimerListenerMissingException extends Exception {
 
-    AnimationListenerMissingException(String message) {
+    TimerListenerMissingException(String message) {
         super(message);
     }
 }
