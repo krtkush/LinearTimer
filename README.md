@@ -13,7 +13,7 @@ Linear Timer is a custom view for Android that enables circular progress animati
 ## Versioning
 
 Linear Timer follows the [Semantic Versioning System](http://semver.org/).
-It is currently on version `v1.0.0`.
+It is currently on version `v1.1.0`.
 
 ## Setup
 
@@ -29,7 +29,7 @@ In your root 'build.gradle' add the following -
     
 And, in your app 'build.gradle' add this - 
 
-     compile 'com.github.krtkush:LinearTimer:v1.0.0'
+     compile 'com.github.krtkush:LinearTimer:v1.1.0'
 under `dependencies`.
 
 ## Usage
@@ -60,7 +60,7 @@ Here is a list of attributes available to toggle the LinearTimer's basic style -
 After adding the view, here is how the View is initiaized and used -
 
      LinearTimerView linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
-     LinearTimer linearTimer = new LinearTimer(linearTimerView);
+     LinearTimer linearTimer = new LinearTimer(linearTimerView, LinearTimer.CLOCK_WISE_PROGRESSION);
      
      /** 
       * Start the timer. 
@@ -80,6 +80,31 @@ After adding the view, here is how the View is initiaized and used -
       */
      linearTimer.resetTimer();
      
+**Timer Listener**
+
+A Timer Listener can be implemeneted to receieve a call back whenever timer animation finishes.
+
+Implement the following interface in your activity -
+
+    `...implements LinearTimer.TimerListener`
+    
+Pass the instance of the class, which implements the interface, into the LinearTimer constructor.
+
+    LinearTimer linearTimer = new LinearTimer(linearTimerView, LinearTimer.CLOCK_WISE_PROGRESSION, this);
+    
+And then, override the `animationComplete` method.
+
+    @Override
+    public void animationComplete() {
+        Log.i("Animation", "complete");
+    }
+    
+**Direction of Progress Animation**
+
+`LinearTimer.CLOCK_WISE_PROGRESSION` and `LinearTimer.COUNTER_CLOCK_WISE_PROGRESSION` are the two flags available which are to be passed during the LinearTimer object creation.
+
+`LinearTimer linearTimer = new LinearTimer(linearTimerView, LinearTimer.CLOCK_WISE_PROGRESSION, this);`
+
 ## Contribution
 
 Any kind of contribution will be appreciated; feel free to create a pull request or file issues on the issue tracker. If you'd like to contact me, you can reach me at kartikey92[at]gmail.com.
