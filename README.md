@@ -90,11 +90,20 @@ Implement the following interface in your activity -
     
 Pass the instance of the class, which implements the interface, into the LinearTimer constructor.
 
-    LinearTimer linearTimer = new LinearTimer(linearTimerView, LinearTimer.CLOCK_WISE_PROGRESSION);
+    LinearTimer linearTimer = new LinearTimer(linearTimerView, LinearTimer.CLOCK_WISE_PROGRESSION, this);
+    
+And then, override the `animationComplete` method.
+
+    @Override
+    public void animationComplete() {
+        Log.i("Animation", "complete");
+    }
     
 **Direction of Progress Animation**
 
-`LinearTimer.CLOCK_WISE_PROGRESSION` and `LinearTimer.COUNTER_CLOCK_WISE_PROGRESSION` are the two flags available.
+`LinearTimer.CLOCK_WISE_PROGRESSION` and `LinearTimer.COUNTER_CLOCK_WISE_PROGRESSION` are the two flags available which are to be passed during the LinearTimer object creation.
+
+`LinearTimer linearTimer = new LinearTimer(linearTimerView, LinearTimer.CLOCK_WISE_PROGRESSION, this);`
 
 ## Contribution
 
