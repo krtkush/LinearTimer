@@ -14,45 +14,23 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
     private LinearTimerView linearTimerView;
     private ArcProgressAnimation arcProgressAnimation;
-
     private TimerListener timerListener;
+    private int endingAngle;
+    private long duration;
 
-    /**
-     * Overloaded constructor for the case when user does not want to implement the
-     * listener interface.
-     * @param linearTimerView
-     * @param progressDirection
-     */
-    public LinearTimer(LinearTimerView linearTimerView, int progressDirection) {
+    private LinearTimer(Builder builder) {
 
-        initiateTimer(linearTimerView, progressDirection);
-    }
+        this.linearTimerView = builder.linearTimerView;
+        this.timerListener = builder.timerListener;
+        this.endingAngle = builder.endingAngle;
+        this.duration = builder.duration;
 
-    /**
-     * Overloaded constructor for the case when user has implemented the listener interface.
-     * @param linearTimerView
-     * @param progressDirection
-     * @param timerListener
-     */
-    public LinearTimer(LinearTimerView linearTimerView, int progressDirection,
-                       TimerListener timerListener) {
-
-        initiateTimer(linearTimerView, progressDirection);
-        this.timerListener = timerListener;
-    }
-
-    /**
-     * Method that contains the common code needed initiate the timer.
-     * @param linearTimerView
-     * @param progressDirection
-     */
-    private void initiateTimer(LinearTimerView linearTimerView, int progressDirection) {
-
-        this.linearTimerView = linearTimerView;
+        // Set the pre-fill angle.
+        linearTimerView.setPreFillAngle(builder.preFillAngle);
 
         // If the user wants to show the progress in counter clock wise manner,
         // we flip the view on its Y-Axis and let it function as is.
-        if(progressDirection == COUNTER_CLOCK_WISE_PROGRESSION) {
+        if(builder.progressDirection == COUNTER_CLOCK_WISE_PROGRESSION) {
 
             ObjectAnimator objectAnimator = ObjectAnimator
                     .ofFloat(linearTimerView, "rotationY", 0.0f, 180f);
@@ -62,10 +40,9 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     }
 
     /**
-     * @param endingAngle Value between 0-360; The point up-till which the user wants the progression.
-     * @param duration Value in milliseconds; Progress animation time period.
+     * Method to start the timer.
      */
-    public void startTimer(int endingAngle, long duration) {
+    public void startTimer() {
 
         if(arcProgressAnimation == null) {
             arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle, this);
@@ -112,5 +89,68 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
                     "Make sure TimerListener is implemented.");
         else
             return true;
+    }
+
+    public static class Builder {
+
+        private int progressDirection;
+        private LinearTimerView linearTimerView;
+        private TimerListener timerListener;
+        private float preFillAngle = 0;
+        private int endingAngle = 360;
+        private long duration;
+
+        /**
+         * Clock wise or anti-clock wise direction of the progress.
+         * @param progressDirection
+         */
+        public Builder progressDirection(int progressDirection) {
+            this.progressDirection = progressDirection;
+            return this;
+        }
+
+        /**
+         * The reference to the view.
+         * @param linearTimerView
+         * @return
+         */
+        public Builder linearTimerView(LinearTimerView linearTimerView) {
+            this.linearTimerView = linearTimerView;
+            return this;
+        }
+
+        /**
+         * Pass the reference of the class implementing the TimerListener interface.
+         * @param timerListener
+         * @return
+         */
+        public Builder timerListener(TimerListener timerListener) {
+            this.timerListener = timerListener;
+            return this;
+        }
+
+        /**
+         * Angle up-till which the circle should be pre-filled.
+         * @param preFillAngle
+         * @return
+         */
+        public Builder preFillAngle(float preFillAngle) {
+            this.preFillAngle = preFillAngle;
+            return this;
+        }
+
+        /**
+         * Duration for which the user wants to run the timer for.
+         * @param duration
+         * @return
+         */
+        public Builder duration(long duration) {
+            this.duration = duration;
+            return this;
+        }
+
+        public LinearTimer build() {
+            return new LinearTimer(this);
+        }
     }
 }

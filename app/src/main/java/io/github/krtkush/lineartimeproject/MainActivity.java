@@ -18,13 +18,20 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
         setContentView(R.layout.activity_main);
 
         LinearTimerView linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
-        linearTimer = new LinearTimer(linearTimerView, LinearTimer.COUNTER_CLOCK_WISE_PROGRESSION);
+
+        linearTimer = new LinearTimer.Builder()
+                .linearTimerView(linearTimerView)
+                .progressDirection(LinearTimer.CLOCK_WISE_PROGRESSION)
+                .duration(10 * 1000)
+                .preFillAngle(90)
+                .timerListener(this)
+                .build();
 
         // Start the timer.
         findViewById(R.id.startTimer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                linearTimer.startTimer(360, 10 * 1000);
+                linearTimer.startTimer();
             }
         });
 
@@ -35,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
                 linearTimer.restartTimer();
             }
         });
+
     }
 
     @Override

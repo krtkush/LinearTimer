@@ -48,8 +48,6 @@ public class LinearTimerView extends View {
                         ContextCompat.getColor(getContext(), R.color.colorProgress));
         this.startingAngle =
                 typedArray.getInt(R.styleable.LinearTimerView_startingPoint, 270);
-        this.preFillAngle =
-                typedArray.getInt(R.styleable.LinearTimerView_preFillPoint, 0);
 
         // Define the size of the circle.
         rectF = new RectF(
