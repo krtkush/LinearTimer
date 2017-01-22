@@ -23,8 +23,9 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
                 .linearTimerView(linearTimerView)
                 .progressDirection(LinearTimer.CLOCK_WISE_PROGRESSION)
                 .duration(10 * 1000)
-                .preFillAngle(90)
+                .preFillAngle(0)
                 .timerListener(this)
+                .endingAngle(270)
                 .build();
 
         // Start the timer.

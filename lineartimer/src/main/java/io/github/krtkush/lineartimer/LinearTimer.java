@@ -149,6 +149,16 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
             return this;
         }
 
+        /**
+         * The angle at which the user wnats the animation to end.
+         * @param endingAngle
+         * @return
+         */
+        public Builder endingAngle(int endingAngle) {
+            this.endingAngle = endingAngle;
+            return this;
+        }
+
         public LinearTimer build() {
             return new LinearTimer(this);
         }
