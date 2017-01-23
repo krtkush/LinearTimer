@@ -15,7 +15,9 @@
         android:layout_height="120dp"
         timer:radius="20dp"
         timer:strokeWidth="3dp"
-        timer:startingPoint="270" />
+        timer:startingPoint="270"
+        timer:initialColor="@color/colorPrimary"
+        timer:progressColor="@color/colorAccent"/>
 
     <Button
         android:id="@+id/startTimer"
