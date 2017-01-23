@@ -26,29 +26,19 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         this.duration = builder.duration;
         float preFillAngle = builder.preFillAngle;
 
-        try {
-            if(timerViewCheck()) {
-                try {
-                    if(durationCheck()) {
-                        // Set the pre-fill angle.
-                        linearTimerView.setPreFillAngle(preFillAngle);
+        if(basicParametersCheck()) {
+            // Set the pre-fill angle.
+            linearTimerView.setPreFillAngle(preFillAngle);
 
-                        // If the user wants to show the progress in counter clock wise manner,
-                        // we flip the view on its Y-Axis and let it function as is.
-                        if(builder.progressDirection == COUNTER_CLOCK_WISE_PROGRESSION) {
+            // If the user wants to show the progress in counter clock wise manner,
+            // we flip the view on its Y-Axis and let it function as is.
+            if (builder.progressDirection == COUNTER_CLOCK_WISE_PROGRESSION) {
 
-                            ObjectAnimator objectAnimator = ObjectAnimator
-                                    .ofFloat(linearTimerView, "rotationY", 0.0f, 180f);
-                            objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-                            objectAnimator.start();
-                        }
-                    }
-                } catch (LinearTimerDurationMissingException ex) {
-                    ex.printStackTrace();
-                }
+                ObjectAnimator objectAnimator = ObjectAnimator
+                        .ofFloat(linearTimerView, "rotationY", 0.0f, 180f);
+                objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+                objectAnimator.start();
             }
-        } catch (LinearTimerViewMissingException ex) {
-            ex.printStackTrace();
         }
     }
 
@@ -57,10 +47,12 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      */
     public void startTimer() {
 
-        if(arcProgressAnimation == null) {
-            arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle, this);
-            arcProgressAnimation.setDuration(duration);
-            linearTimerView.startAnimation(arcProgressAnimation);
+        if(basicParametersCheck()) {
+            if(arcProgressAnimation == null) {
+                arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle, this);
+                arcProgressAnimation.setDuration(duration);
+                linearTimerView.startAnimation(arcProgressAnimation);
+            }
         }
     }
 
@@ -68,9 +60,12 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      * Method to reset the timer to start angle and then start the progress again.
      */
     public void restartTimer() {
-        if(arcProgressAnimation != null) {
-            arcProgressAnimation.cancel();
-            linearTimerView.startAnimation(arcProgressAnimation);
+
+        if(basicParametersCheck()) {
+            if(arcProgressAnimation != null) {
+                arcProgressAnimation.cancel();
+                linearTimerView.startAnimation(arcProgressAnimation);
+            }
         }
     }
 
@@ -89,6 +84,24 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      */
     public interface TimerListener {
         void animationComplete();
+    }
+
+    /**
+     * Method to check whether the following basic params, needed to setup the timer,
+     * have been passed by the user or not -
+     * 1. LinearTimerView
+     * 2. Duration
+     */
+    private boolean basicParametersCheck() {
+        try {
+            if(timerViewCheck() && durationCheck()) {
+                return true;
+            }
+        } catch (LinearTimerViewMissingException | LinearTimerDurationMissingException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
     }
 
     /**
@@ -117,7 +130,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      */
     private boolean listenerCheck() throws LinearTimerListenerMissingException {
         if(timerListener == null)
-            throw  new LinearTimerListenerMissingException("");
+            throw new LinearTimerListenerMissingException("");
         else
             return true;
     }
