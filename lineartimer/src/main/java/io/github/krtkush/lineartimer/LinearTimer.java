@@ -93,7 +93,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
     public static class Builder {
 
-        private int progressDirection;
+        private int progressDirection = LinearTimer.CLOCK_WISE_PROGRESSION;
         private LinearTimerView linearTimerView;
         private TimerListener timerListener;
         private float preFillAngle = 0;
