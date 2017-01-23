@@ -12,11 +12,11 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     public static final int CLOCK_WISE_PROGRESSION = 0;
     public static final int COUNTER_CLOCK_WISE_PROGRESSION = 1;
 
-    private LinearTimerView linearTimerView = null;
+    private LinearTimerView linearTimerView;
     private ArcProgressAnimation arcProgressAnimation;
-    private TimerListener timerListener = null;
+    private TimerListener timerListener;
     private int endingAngle;
-    private long duration = 0;
+    private long duration;
 
     private LinearTimer(Builder builder) {
 
@@ -24,13 +24,14 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         this.timerListener = builder.timerListener;
         this.endingAngle = builder.endingAngle;
         this.duration = builder.duration;
+        float preFillAngle = builder.preFillAngle;
 
         try {
             if(timerViewCheck()) {
                 try {
                     if(durationCheck()) {
                         // Set the pre-fill angle.
-                        linearTimerView.setPreFillAngle(builder.preFillAngle);
+                        linearTimerView.setPreFillAngle(preFillAngle);
 
                         // If the user wants to show the progress in counter clock wise manner,
                         // we flip the view on its Y-Axis and let it function as is.
@@ -75,8 +76,12 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
     @Override
     public void animationComplete() {
-        if(timerListener != null)
-            timerListener.animationComplete();
+        try {
+            if(listenerCheck())
+                timerListener.animationComplete();
+        } catch (LinearTimerListenerMissingException ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -100,8 +105,19 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      * This method checks whether a duration has been provided or not.
      */
     private boolean durationCheck() throws LinearTimerDurationMissingException {
-        if(duration == 0)
+        if(duration == -1)
             throw new LinearTimerDurationMissingException("Timer duration missing.");
+        else
+            return true;
+    }
+
+    /**
+     * This method checks whether the user has provided reference to the class
+     * implementing the listener interface.
+     */
+    private boolean listenerCheck() throws LinearTimerListenerMissingException {
+        if(timerListener == null)
+            throw  new LinearTimerListenerMissingException("");
         else
             return true;
     }
@@ -109,11 +125,11 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     public static class Builder {
 
         private int progressDirection = LinearTimer.CLOCK_WISE_PROGRESSION;
-        private LinearTimerView linearTimerView;
-        private TimerListener timerListener;
+        private LinearTimerView linearTimerView = null;
+        private TimerListener timerListener = null;
         private float preFillAngle = 0;
         private int endingAngle = 360;
-        private long duration;
+        private long duration = -1;
 
         /**
          * Not a mandatory field. Default is clock wise progression.
@@ -180,7 +196,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     }
 
     /**
-     * Exception thrown if user fails to provide reference to the LinearTimerView.
+     * Exception thrown when user fails to provide reference to the LinearTimerView.
      */
     private class LinearTimerViewMissingException extends Exception {
 
@@ -190,11 +206,22 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     }
 
     /**
-     * Exception thrown if user fails to provide the duration of the timer.
+     * Exception thrown when user fails to provide the duration of the timer.
      */
     private class LinearTimerDurationMissingException extends Exception {
 
         LinearTimerDurationMissingException(String message) {
+            super(message);
+        }
+    }
+
+    /**
+     * Exception thrown when user fails to reference to the class
+     * implementing the listener interface.
+     */
+    private class LinearTimerListenerMissingException extends Exception {
+
+        LinearTimerListenerMissingException(String message) {
             super(message);
         }
     }

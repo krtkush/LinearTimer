@@ -22,9 +22,9 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
         linearTimer = new LinearTimer.Builder()
                 .linearTimerView(linearTimerView)
                 .duration(10 * 1000)
+                .timerListener(this)
                 .progressDirection(LinearTimer.CLOCK_WISE_PROGRESSION)
                 .preFillAngle(0)
-                .timerListener(this)
                 .endingAngle(270)
                 .build();
 
