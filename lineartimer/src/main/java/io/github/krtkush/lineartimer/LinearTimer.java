@@ -31,8 +31,9 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
         if(basicParametersCheck()) {
 
+            // timeElapsed < 0 does not need pre-fill angle to be determined.
             if(timeElapsed > 0)
-                setInitialFill();
+                determinePreFillAngle();
 
             // Set the pre-fill angle.
             linearTimerView.setPreFillAngle(preFillAngle);
@@ -52,7 +53,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     /**
      * If the user has defined timeElapsed value, this method calculates the length of pre-fill.
      */
-    private void setInitialFill() {
+    private void determinePreFillAngle() {
 
         float timeElapsedPercentage = (((float) timeElapsed / (float) totalDuration)) * 100;
         this.preFillAngle = (timeElapsedPercentage / 100) * 360;
