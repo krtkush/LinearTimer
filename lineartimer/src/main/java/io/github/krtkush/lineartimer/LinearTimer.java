@@ -200,9 +200,9 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         }
 
         /**
-         * A mandatory field.
-         * @param totalDuration Duration, in milliseconds, for which the user wants
+         * A mandatory field. Duration for which the user wants
          *                      to run the timer for.
+         * @param totalDuration in milliseconds,
          * @return
          */
         public Builder duration(long totalDuration) {
