@@ -16,17 +16,24 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     private ArcProgressAnimation arcProgressAnimation;
     private TimerListener timerListener;
     private int endingAngle;
-    private long duration;
+    private long totalDuration;
+    private long timeElapsed;
+    private float preFillAngle;
 
     private LinearTimer(Builder builder) {
 
         this.linearTimerView = builder.linearTimerView;
         this.timerListener = builder.timerListener;
         this.endingAngle = builder.endingAngle;
-        this.duration = builder.duration;
-        float preFillAngle = builder.preFillAngle;
+        this.totalDuration = builder.totalDuration;
+        this.preFillAngle = builder.preFillAngle;
+        this.timeElapsed = builder.timeElapsed;
 
         if(basicParametersCheck()) {
+
+            if(timeElapsed > 0)
+                setInitialFill();
+
             // Set the pre-fill angle.
             linearTimerView.setPreFillAngle(preFillAngle);
 
@@ -43,6 +50,15 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     }
 
     /**
+     * If the user has defined timeElapsed value, this method calculates the length of pre-fill.
+     */
+    private void setInitialFill() {
+
+        float timeElapsedPercentage = (((float) timeElapsed / (float) totalDuration)) * 100;
+        this.preFillAngle = (timeElapsedPercentage / 100) * 360;
+    }
+
+    /**
      * Method to start the timer.
      */
     public void startTimer() {
@@ -50,7 +66,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         if(basicParametersCheck()) {
             if(arcProgressAnimation == null) {
                 arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle, this);
-                arcProgressAnimation.setDuration(duration);
+                arcProgressAnimation.setDuration(totalDuration);
                 linearTimerView.startAnimation(arcProgressAnimation);
             }
         }
@@ -94,9 +110,8 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      */
     private boolean basicParametersCheck() {
         try {
-            if(timerViewCheck() && durationCheck()) {
+            if(timerViewCheck() && durationCheck())
                 return true;
-            }
         } catch (LinearTimerViewMissingException | LinearTimerDurationMissingException ex) {
             ex.printStackTrace();
         }
@@ -115,11 +130,11 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     }
 
     /**
-     * This method checks whether a duration has been provided or not.
+     * This method checks whether a totalDuration has been provided or not.
      */
     private boolean durationCheck() throws LinearTimerDurationMissingException {
-        if(duration == -1)
-            throw new LinearTimerDurationMissingException("Timer duration missing.");
+        if(totalDuration == -1)
+            throw new LinearTimerDurationMissingException("Timer totalDuration missing.");
         else
             return true;
     }
@@ -142,7 +157,8 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         private TimerListener timerListener = null;
         private float preFillAngle = 0;
         private int endingAngle = 360;
-        private long duration = -1;
+        private long totalDuration = -1;
+        private long timeElapsed = 0;
 
         /**
          * Not a mandatory field. Default is clock wise progression.
@@ -185,11 +201,27 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
         /**
          * A mandatory field.
-         * @param duration Duration, in milliseconds, for which the user wants to run the timer for.
+         * @param totalDuration Duration, in milliseconds, for which the user wants
+         *                      to run the timer for.
          * @return
          */
-        public Builder duration(long duration) {
-            this.duration = duration;
+        public Builder duration(long totalDuration) {
+            this.totalDuration = totalDuration;
+            return this;
+        }
+
+        /**
+         * Overloaded method.
+         * When the user wants to continue the timer animation from a certain point and that point
+         * is in respect to the time elapsed. USe of this method will override the `preFillAngle`
+         * value.
+         * @param totalDuration in milliseconds.
+         * @param timeElapsed in milliseconds.
+         * @return
+         */
+        public Builder duration(long totalDuration, long timeElapsed) {
+            this.totalDuration = totalDuration;
+            this.timeElapsed = timeElapsed;
             return this;
         }
 
@@ -219,7 +251,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     }
 
     /**
-     * Exception thrown when user fails to provide the duration of the timer.
+     * Exception thrown when user fails to provide the totalDuration of the timer.
      */
     private class LinearTimerDurationMissingException extends Exception {
 
