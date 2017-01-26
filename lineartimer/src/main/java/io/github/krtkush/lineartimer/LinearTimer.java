@@ -31,7 +31,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
         if (basicParametersCheck()) {
 
-            // timeElapsed < 0 does not need pre-fill angle to be determined.
+            // timeElapsed = 0 does not need pre-fill angle to be determined.
             if (timeElapsed > 0)
                 determinePreFillAngle();
 
