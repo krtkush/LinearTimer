@@ -32,7 +32,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         if(basicParametersCheck()) {
 
             // timeElapsed < 0 does not need pre-fill angle to be determined.
-            if(timeElapsed > 0)
+            if (timeElapsed > 0)
                 determinePreFillAngle();
 
             // Set the pre-fill angle.
@@ -64,8 +64,8 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      */
     public void startTimer() {
 
-        if(basicParametersCheck()) {
-            if(arcProgressAnimation == null) {
+        if (basicParametersCheck()) {
+            if (arcProgressAnimation == null) {
                 arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle, this);
                 arcProgressAnimation.setDuration(totalDuration);
                 linearTimerView.startAnimation(arcProgressAnimation);
@@ -78,8 +78,8 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      */
     public void restartTimer() {
 
-        if(basicParametersCheck()) {
-            if(arcProgressAnimation != null) {
+        if (basicParametersCheck()) {
+            if (arcProgressAnimation != null) {
                 arcProgressAnimation.cancel();
                 linearTimerView.startAnimation(arcProgressAnimation);
             }
@@ -89,7 +89,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     @Override
     public void animationComplete() {
         try {
-            if(listenerCheck())
+            if (listenerCheck())
                 timerListener.animationComplete();
         } catch (LinearTimerListenerMissingException ex) {
             ex.printStackTrace();
@@ -111,7 +111,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      */
     private boolean basicParametersCheck() {
         try {
-            if(timerViewCheck() && durationCheck())
+            if (timerViewCheck() && durationCheck())
                 return true;
         } catch (LinearTimerViewMissingException | LinearTimerDurationMissingException ex) {
             ex.printStackTrace();
@@ -124,7 +124,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      * This method checks whether the LinearTimerView's reference has been passed or not.
      */
     private boolean timerViewCheck() throws LinearTimerViewMissingException {
-        if(linearTimerView == null)
+        if (linearTimerView == null)
             throw new LinearTimerViewMissingException("Reference to LinearTimer View missing.");
         else
             return true;
@@ -134,7 +134,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      * This method checks whether a totalDuration has been provided or not.
      */
     private boolean durationCheck() throws LinearTimerDurationMissingException {
-        if(totalDuration == -1)
+        if (totalDuration == -1)
             throw new LinearTimerDurationMissingException("Timer totalDuration missing.");
         else
             return true;
@@ -145,7 +145,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      * implementing the listener interface.
      */
     private boolean listenerCheck() throws LinearTimerListenerMissingException {
-        if(timerListener == null)
+        if (timerListener == null)
             throw new LinearTimerListenerMissingException("");
         else
             return true;
