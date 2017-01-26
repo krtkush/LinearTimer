@@ -26,7 +26,7 @@ public class LinearTimerView extends View {
     private int startingAngle = 270;
 
     // The point up-till which user wants the circle to be pre-filled.
-    private float preFillAngle = 0;
+    private float preFillAngle;
 
     public LinearTimerView(Context context,
                            AttributeSet attrs) {

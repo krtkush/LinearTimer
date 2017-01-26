@@ -29,7 +29,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         this.preFillAngle = builder.preFillAngle;
         this.timeElapsed = builder.timeElapsed;
 
-        if(basicParametersCheck()) {
+        if (basicParametersCheck()) {
 
             // timeElapsed < 0 does not need pre-fill angle to be determined.
             if (timeElapsed > 0)
