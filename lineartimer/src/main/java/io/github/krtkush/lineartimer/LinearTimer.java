@@ -176,6 +176,11 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
             return true;
     }
 
+    /**
+     * Method to setup the countdown timer which returns time left (in milliseconds) for the timer
+     * to end.
+     * @param timeLeftInMillis the time in millis for which the timer should run.
+     */
     private void setCountDownTimer(long timeLeftInMillis) {
         new CountDownTimer(timeLeftInMillis, 1000) {
 
