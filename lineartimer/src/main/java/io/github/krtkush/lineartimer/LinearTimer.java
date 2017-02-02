@@ -1,6 +1,7 @@
 package io.github.krtkush.lineartimer;
 
 import android.animation.ObjectAnimator;
+import android.os.CountDownTimer;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 /**
@@ -12,6 +13,9 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     public static final int CLOCK_WISE_PROGRESSION = 0;
     public static final int COUNTER_CLOCK_WISE_PROGRESSION = 1;
 
+    public static final int COUNT_UP_TIMER = 2;
+    public static final int COUNT_DOWN_TIMER = 3;
+
     private LinearTimerView linearTimerView;
     private ArcProgressAnimation arcProgressAnimation;
     private TimerListener timerListener;
@@ -19,6 +23,8 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     private long totalDuration;
     private long timeElapsed;
     private float preFillAngle;
+    private int countType;
+    private long animationDuration;
 
     private LinearTimer(Builder builder) {
 
@@ -28,8 +34,12 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         this.totalDuration = builder.totalDuration;
         this.preFillAngle = builder.preFillAngle;
         this.timeElapsed = builder.timeElapsed;
+        this.countType = builder.countType;
 
         if (basicParametersCheck()) {
+
+            // Calculate the animation duration.
+            animationDuration = totalDuration - timeElapsed;
 
             // timeElapsed = 0 does not need pre-fill angle to be determined.
             if (timeElapsed > 0)
@@ -67,8 +77,22 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         if (basicParametersCheck()) {
             if (arcProgressAnimation == null) {
                 arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle, this);
-                arcProgressAnimation.setDuration(totalDuration);
+                arcProgressAnimation.setDuration(animationDuration);
                 linearTimerView.startAnimation(arcProgressAnimation);
+
+                // Check if the user wants to show the timer left or elapsed.
+                if (countType != -1) {
+
+                    switch (countType) {
+
+                        case COUNT_DOWN_TIMER:
+                            setCountDownTimer(animationDuration);
+                            break;
+
+                        case COUNT_UP_TIMER:
+                            break;
+                    }
+                }
             }
         }
     }
@@ -101,6 +125,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      */
     public interface TimerListener {
         void animationComplete();
+        void timerTick(long millisUntilFinished);
     }
 
     /**
@@ -151,6 +176,21 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
             return true;
     }
 
+    private void setCountDownTimer(long timeLeftInMillis) {
+        new CountDownTimer(timeLeftInMillis, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timerListener.timerTick(millisUntilFinished);
+            }
+
+            @Override
+            public void onFinish() {
+                // Do nothing.
+            }
+        }.start();
+    }
+
     public static class Builder {
 
         private int progressDirection = LinearTimer.CLOCK_WISE_PROGRESSION;
@@ -160,6 +200,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         private int endingAngle = 360;
         private long totalDuration = -1;
         private long timeElapsed = 0;
+        private int countType = -1;
 
         /**
          * Not a mandatory field. Default is clock wise progression.
@@ -233,6 +274,18 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
          */
         public Builder endingAngle(int endingAngle) {
             this.endingAngle = endingAngle;
+            return this;
+        }
+
+        /**
+         * Not a mandatory field.
+         * This enables the LinearTimer library to return time elapsed or time left depending on the
+         * type of timer applied.
+         * @param countType The type of timer the user wants to show - count down or count up.
+         * @return
+         */
+        public Builder showCount(int countType) {
+            this.countType = countType;
             return this;
         }
 
