@@ -204,7 +204,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
             @Override
             public void onFinish() {
-                // Do nothing.
+                timerListener.timerTick(0);
             }
         }.start();
     }
@@ -214,7 +214,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      * The timer stops when it has run for the required duration.
      * @param runningTimeInMilliseconds the time in millis for which the timer should run.
      */
-    private void setCountUpTimer(long runningTimeInMilliseconds) {
+    private void setCountUpTimer(final long runningTimeInMilliseconds) {
         new CountUpTimer(runningTimeInMilliseconds, updateInterval) {
 
             @Override
@@ -224,7 +224,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
             @Override
             public void onFinish() {
-                // Do nothing.
+                timerListener.timerTick(runningTimeInMilliseconds);
             }
         }.start();
     }
