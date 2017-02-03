@@ -13,7 +13,7 @@ Linear Timer is a custom view for Android that enables circular progress animati
 ## Versioning
 
 Linear Timer follows the [Semantic Versioning System](http://semver.org/).
-It is currently on version `v1.1.0`.
+It is currently on version `v2.0.0`.
 
 ## Setup
 
@@ -29,81 +29,43 @@ In your root 'build.gradle' add the following -
     
 And, in your app 'build.gradle' add this - 
 
-     compile 'com.github.krtkush:LinearTimer:v1.1.0'
+     compile 'com.github.krtkush:LinearTimer:v2.0.0'
 under `dependencies`.
 
 ## Usage
 
-First, you need the following view in your layout XML - 
+Following is how you can implement LinearTimer in its simplest form.
+
+First, you need to add `LinearTimerView` into your XML layout -
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
-      
+
     <io.github.krtkush.lineartimer.LinearTimerView
-      android:id="@+id/linearTimer"
-      android:layout_centerInParent="true"
-      android:layout_width="120dp"
-      android:layout_height="120dp"
-      app:radius="20dp"
-      app:strokeWidth="3dp"
-      app:startingPoint="270"
-      app:preFillPoint="0" />
-        
-Here is a list of attributes available to toggle the LinearTimer's basic style -
+        android:id="@+id/linearTimer"
+        android:layout_centerHorizontal="true"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:radius="20dp"
+        app:strokeWidth="3dp"/>
 
-1. **radius** - The radius of the circle.
-2. **strokeWidth** - the thickness of the circle boundary.
-3. **startingPoint** - The angle from where, in the timer, you want the animation to start. 270 is the 12 O'Clock position.
-4. **preFillPoint** - The angle up-till which you want the circle to be pre-filled.
-5. **initialColor** - The initial color of the circle. 
-6. **progressColor** - The color of the prgress arc that animates over the initial color. 
-
-After adding the view, here is how the View is initiaized and used -
+After adding the view, here is how the View is initialized and used -
 
      LinearTimerView linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
-     LinearTimer linearTimer = new LinearTimer(linearTimerView, LinearTimer.CLOCK_WISE_PROGRESSION);
-     
-     /** 
-      * Start the timer. 
-      *
-      * First argument represents the angle at which the animation should finish.
-      * Second argument represents the duration of the animation in milliseconds. 
-      */
-     linearTimer.startTimer(360, 60 * 1000);
-     
-     /**
-      * Reset the timer to the start angle and then start the progress again.
-      */
-     linearTimer.restartTimer();
-     
-      /**
-      * Method to reset the timer to start angle.
-      */
-     linearTimer.resetTimer();
-     
-**Timer Listener**
 
-A Timer Listener can be implemeneted to receieve a call back whenever timer animation finishes.
+     LinearTimer linearTimer = new new LinearTimer.Builder()
+                .linearTimerView(linearTimerView)
+                .duration(10 * 1000)
+                .build();
 
-Implement the following interface in your activity -
+     // Start the timer.
+     findViewById(R.id.startTimer).setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+            linearTimer.startTimer();
+           }
+     });
 
-    `...implements LinearTimer.TimerListener`
-    
-Pass the instance of the class, which implements the interface, into the LinearTimer constructor.
-
-    LinearTimer linearTimer = new LinearTimer(linearTimerView, LinearTimer.CLOCK_WISE_PROGRESSION, this);
-    
-And then, override the `animationComplete` method.
-
-    @Override
-    public void animationComplete() {
-        Log.i("Animation", "complete");
-    }
-    
-**Direction of Progress Animation**
-
-`LinearTimer.CLOCK_WISE_PROGRESSION` and `LinearTimer.COUNTER_CLOCK_WISE_PROGRESSION` are the two flags available which are to be passed during the LinearTimer object creation.
-
-`LinearTimer linearTimer = new LinearTimer(linearTimerView, LinearTimer.CLOCK_WISE_PROGRESSION, this);`
+**For detailed guide on how to customise and use LinearTimer [click here]()**
 
 ## Contribution
 
