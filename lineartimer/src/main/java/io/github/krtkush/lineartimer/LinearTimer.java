@@ -82,20 +82,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
                 arcProgressAnimation.setDuration(animationDuration);
                 linearTimerView.startAnimation(arcProgressAnimation);
 
-                // Check if the user wants to show the timer left or elapsed.
-                if (countType != -1) {
-
-                    switch (countType) {
-
-                        case COUNT_DOWN_TIMER:
-                            setCountDownTimer(animationDuration);
-                            break;
-
-                        case COUNT_UP_TIMER:
-                            setCountUpTimer(animationDuration);
-                            break;
-                    }
-                }
+                checkForCountUpdate();
             }
         }
     }
@@ -109,6 +96,8 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
             if (arcProgressAnimation != null) {
                 arcProgressAnimation.cancel();
                 linearTimerView.startAnimation(arcProgressAnimation);
+
+                checkForCountUpdate();
             }
         }
     }
@@ -128,7 +117,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      */
     public interface TimerListener {
         void animationComplete();
-        void timerTick(long millisUntilFinished);
+        void timerTick(long tickUpdateInMillis);
     }
 
     /**
@@ -177,6 +166,27 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
             throw new LinearTimerListenerMissingException("");
         else
             return true;
+    }
+
+    /**
+     * Method to check if the user wants tick updates of the timer
+     * and of what type - countdown or up.
+     */
+    private void checkForCountUpdate() {
+
+        if (countType != -1) {
+
+            switch (countType) {
+
+                case COUNT_DOWN_TIMER:
+                    setCountDownTimer(animationDuration);
+                    break;
+
+                case COUNT_UP_TIMER:
+                    setCountUpTimer(animationDuration);
+                    break;
+            }
+        }
     }
 
     /**
@@ -234,6 +244,8 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         /**
          * Not a mandatory field. Default is clock wise progression.
          * @param progressDirection Clock wise or anti-clock wise direction of the progress.
+         *                          LinearTimer.CLOCK_WISE_PROGRESSION
+         *                          or LinearTimer.COUNTER_CLOCK_WISE_PROGRESSION
          */
         public Builder progressDirection(int progressDirection) {
             this.progressDirection = progressDirection;
@@ -243,7 +255,6 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         /**
          * A mandatory field.
          * @param linearTimerView The reference to the view.
-         * @return
          */
         public Builder linearTimerView(LinearTimerView linearTimerView) {
             this.linearTimerView = linearTimerView;
@@ -253,7 +264,6 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         /**
          * Not a mandatory field.
          * @param timerListener Reference of the class implementing the TimerListener interface.
-         * @return
          */
         public Builder timerListener(TimerListener timerListener) {
             this.timerListener = timerListener;
@@ -263,7 +273,6 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         /**
          * Not a mandatory field.
          * @param preFillAngle Angle up-till which the circle should be pre-filled.
-         * @return
          */
         public Builder preFillAngle(float preFillAngle) {
             this.preFillAngle = preFillAngle;
@@ -288,7 +297,6 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
          * value.
          * @param totalDuration in milliseconds.
          * @param timeElapsed in milliseconds.
-         * @return
          */
         public Builder duration(long totalDuration, long timeElapsed) {
             this.totalDuration = totalDuration;
@@ -299,7 +307,6 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         /**
          * Not a mandatory field.
          * @param endingAngle The angle at which the user wants the animation to end.
-         * @return
          */
         public Builder endingAngle(int endingAngle) {
             this.endingAngle = endingAngle;
@@ -310,10 +317,10 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
          * Not a mandatory field.
          * This enables the LinearTimer library to return time elapsed or time left depending on the
          * type of timer applied.
-         * @param countType The type of timer the user wants to show - count down or count up.
+         * @param countType The type of timer the user wants to show;
+         *                  LinearTimer.COUNT_UP_TIMER or LinearTimer.COUNT_DOWN_TIMER.
          * @param updateInterval Duration (in millis) after which user wants the updates.
          *                       Should be > 0.
-         * @return
          */
         public Builder getCountUpdate(int countType, long updateInterval) {
             this.countType = countType;
