@@ -25,6 +25,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     private float preFillAngle;
     private int countType;
     private long animationDuration;
+    private long updateInterval;
 
     private LinearTimer(Builder builder) {
 
@@ -35,6 +36,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         this.preFillAngle = builder.preFillAngle;
         this.timeElapsed = builder.timeElapsed;
         this.countType = builder.countType;
+        this.updateInterval = builder.updateInterval;
 
         if (basicParametersCheck()) {
 
@@ -183,7 +185,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      * @param timeLeftInMillis the time in millis for which the timer should run.
      */
     private void setCountDownTimer(long timeLeftInMillis) {
-        new CountDownTimer(timeLeftInMillis, 1000) {
+        new CountDownTimer(timeLeftInMillis, updateInterval) {
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -204,7 +206,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      */
     private void setCountUpTimer(long runningTimeInMilliseconds) {
 
-        new CountUpTimer(runningTimeInMilliseconds, 1000) {
+        new CountUpTimer(runningTimeInMilliseconds, updateInterval) {
 
             @Override
             public void onTick(long elapsedTime) {
@@ -228,6 +230,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         private long totalDuration = -1;
         private long timeElapsed = 0;
         private int countType = -1;
+        private long updateInterval = 1000;
 
         /**
          * Not a mandatory field. Default is clock wise progression.
@@ -309,10 +312,13 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
          * This enables the LinearTimer library to return time elapsed or time left depending on the
          * type of timer applied.
          * @param countType The type of timer the user wants to show - count down or count up.
+         * @param updateInterval Duration (in millis) after which user wants the updates.
+         *                       Should be > 0.
          * @return
          */
-        public Builder showCount(int countType) {
+        public Builder getCountUpdate(int countType, long updateInterval) {
             this.countType = countType;
+            this.updateInterval = updateInterval;
             return this;
         }
 

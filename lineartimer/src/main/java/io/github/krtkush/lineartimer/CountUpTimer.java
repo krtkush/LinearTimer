@@ -6,6 +6,9 @@ import android.os.SystemClock;
 
 /**
  * Created by kartikeykushwaha on 02/02/17.
+ *
+ * CountUpTimer is similar to the Android CountDownTimer in respect to implementation and
+ * behaviour.
  */
 
 public abstract class CountUpTimer {
