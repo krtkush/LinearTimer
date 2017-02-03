@@ -205,7 +205,6 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      * @param runningTimeInMilliseconds the time in millis for which the timer should run.
      */
     private void setCountUpTimer(long runningTimeInMilliseconds) {
-
         new CountUpTimer(runningTimeInMilliseconds, updateInterval) {
 
             @Override
