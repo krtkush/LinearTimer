@@ -90,6 +90,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
                             break;
 
                         case COUNT_UP_TIMER:
+                            setCountUpTimer(animationDuration);
                             break;
                     }
                 }
@@ -187,6 +188,27 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
             @Override
             public void onTick(long millisUntilFinished) {
                 timerListener.timerTick(millisUntilFinished);
+            }
+
+            @Override
+            public void onFinish() {
+                // Do nothing.
+            }
+        }.start();
+    }
+
+    /**
+     * Method to setup the countup timer which returns the time elapsed since the timer has started.
+     * The timer stops when it has run for the required duration.
+     * @param runningTimeInMilliseconds the time in millis for which the timer should run.
+     */
+    private void setCountUpTimer(long runningTimeInMilliseconds) {
+
+        new CountUpTimer(runningTimeInMilliseconds, 1000) {
+
+            @Override
+            public void onTick(long elapsedTime) {
+                timerListener.timerTick(elapsedTime);
             }
 
             @Override

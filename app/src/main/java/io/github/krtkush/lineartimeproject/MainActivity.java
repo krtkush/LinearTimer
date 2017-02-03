@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
                 .progressDirection(LinearTimer.CLOCK_WISE_PROGRESSION)
                 .preFillAngle(0)
                 .endingAngle(360)
-                .showCount(LinearTimer.COUNT_DOWN_TIMER)
+                .showCount(LinearTimer.COUNT_UP_TIMER)
                 .build();
 
         // Start the timer.
