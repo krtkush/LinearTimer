@@ -17,7 +17,7 @@ Linear Timer supports following features -
 
 ## Screenshots
 
-<img src="https://github.com/krtkush/LinearTimer/blob/v2.0.0/Screenshots/demo.gif" width="200" height="350" />
+<img src="https://raw.githubusercontent.com/krtkush/LinearTimer/master/Screenshots/demo.gif" width="200" height="350" />
 
 ## Versioning
 
