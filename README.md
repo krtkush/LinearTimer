@@ -61,7 +61,7 @@ After adding the view, here is how the View is initialized and used -
 
      LinearTimerView linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
 
-     LinearTimer linearTimer = new new LinearTimer.Builder()
+     LinearTimer linearTimer = new LinearTimer.Builder()
                 .linearTimerView(linearTimerView)
                 .duration(10 * 1000)
                 .build();
