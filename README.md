@@ -8,6 +8,7 @@ Linear Timer supports following features -
 2. Get time elapsed since timer started or time left for the counter to complete.
 3. Provide Start and finish points for the animation.
 4. Pre-fill the progress up-till certain point.
+5. Resume the animation on the basis of duration elapsed from total duration.
 
 ...and much more.
 
