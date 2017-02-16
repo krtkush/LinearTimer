@@ -28,7 +28,7 @@ It is currently on version `v2.0.0`.
 ## Setup
 
 Setup is pretty straight forward. 
-In your root 'build.gradle' add the following - 
+In your project's `build.gradle` add the following - 
 
     allprojects {
       repositories {
@@ -37,10 +37,9 @@ In your root 'build.gradle' add the following -
       }
     }
     
-And, in your app 'build.gradle' add this - 
+And, in your app's `build.gradle` add this under `dependencies` block -
 
      compile 'com.github.krtkush:LinearTimer:v2.0.0'
-under `dependencies`.
 
 ## Usage
 
