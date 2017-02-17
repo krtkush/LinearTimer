@@ -13,7 +13,7 @@ Linear Timer supports following features -
 ...and much more.
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Linear%20Timer-brightgreen.svg?style=social)](https://android-arsenal.com/details/1/4959)  [![Release](https://jitpack.io/v/krtkush/LinearTimer.svg)]
-(https://jitpack.io/#User/Repo)
+(https://jitpack.io/#krtkush/LinearTimer)
 
 **If you're using this library, please let me know; I'll feature your app in this readme.**
 
