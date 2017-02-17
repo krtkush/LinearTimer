@@ -8,16 +8,18 @@ Linear Timer supports following features -
 2. Get time elapsed since timer started or time left for the counter to complete.
 3. Provide Start and finish points for the animation.
 4. Pre-fill the progress up-till certain point.
+5. Resume the animation on the basis of duration elapsed from total duration.
 
 ...and much more.
 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Linear%20Timer-brightgreen.svg?style=social)](https://android-arsenal.com/details/1/4959)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Linear%20Timer-brightgreen.svg?style=social)](https://android-arsenal.com/details/1/4959)  [![Release](https://jitpack.io/v/krtkush/LinearTimer.svg)]
+(https://jitpack.io/#krtkush/LinearTimer)
 
 **If you're using this library, please let me know; I'll feature your app in this readme.**
 
 ## Screenshots
 
-<img src="https://github.com/krtkush/LinearTimer/blob/v2.0.0/Screenshots/demo.gif" width="200" height="350" />
+<img src="https://raw.githubusercontent.com/krtkush/LinearTimer/master/Screenshots/demo.gif" width="200" height="350" />
 
 ## Versioning
 
@@ -27,7 +29,7 @@ It is currently on version `v2.0.0`.
 ## Setup
 
 Setup is pretty straight forward. 
-In your root 'build.gradle' add the following - 
+In your project's `build.gradle` add the following - 
 
     allprojects {
       repositories {
@@ -36,10 +38,9 @@ In your root 'build.gradle' add the following -
       }
     }
     
-And, in your app 'build.gradle' add this - 
+And, in your app's `build.gradle` add this under `dependencies` block -
 
      compile 'com.github.krtkush:LinearTimer:v2.0.0'
-under `dependencies`.
 
 ## Usage
 
@@ -61,7 +62,7 @@ After adding the view, here is how the View is initialized and used -
 
      LinearTimerView linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
 
-     LinearTimer linearTimer = new new LinearTimer.Builder()
+     LinearTimer linearTimer = new LinearTimer.Builder()
                 .linearTimerView(linearTimerView)
                 .duration(10 * 1000)
                 .build();
@@ -74,8 +75,8 @@ After adding the view, here is how the View is initialized and used -
            }
      });
 
-For detailed documentation and on how to customise and use LinearTimer [see this blog post](https://krtkush.github.io/2017/02/03/Linear-timer-v2-0-0.html).
+For detailed documentation and on how to customise and use LinearTimer [see this blog post](https://krtkush.github.io/2017/02/03/Linear-timer.html).
 
 ## Contribution
 
-Any kind of contribution will be appreciated; feel free to create a pull request or file issues on the issue tracker. If you'd like to contact me, you can reach me at kartikey92[at]gmail.com.
+Any kind of contribution will be appreciated; feel free to create a pull request or file issues on the issue tracker.
