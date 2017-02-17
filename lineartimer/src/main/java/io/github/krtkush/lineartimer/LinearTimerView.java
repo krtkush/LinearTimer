@@ -1,12 +1,14 @@
 package io.github.krtkush.lineartimer;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 
 /**
@@ -112,7 +114,9 @@ public class LinearTimerView extends View {
      * Method to convert DPs into Pixels.
      */
     private float convertDpIntoPixel(float dp) {
-        float scale = getResources().getDisplayMetrics().density;
-        return dp * scale + 0.5f;
+
+        Resources resources = getResources();
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
+                resources.getDisplayMetrics());
     }
 }
