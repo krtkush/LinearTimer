@@ -36,7 +36,7 @@
         android:id="@+id/linearTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        timer:radius="15dp"
+        timer:radius="5dp"
         timer:strokeWidth="2dp"
         timer:startingPoint="270"
         timer:initialColor="@color/colorPrimary"

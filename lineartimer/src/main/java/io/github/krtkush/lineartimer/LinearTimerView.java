@@ -101,45 +101,45 @@ public class LinearTimerView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
-        int desiredWidth = (int) convertDpIntoPixel(circleRadiusInDp)
-                + (int) convertDpIntoPixel(strokeWidthInDp);
-        int desiredHeight = (int) convertDpIntoPixel(circleRadiusInDp)
-                + (int) convertDpIntoPixel(strokeWidthInDp);
+        int desiredHeight = (int) convertDpIntoPixel(circleRadiusInDp);
+        int desiredWidth = (int) convertDpIntoPixel(circleRadiusInDp);
 
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
-        int width;
-        int height;
+        int finalWidth;
+        int finalHeight;
 
         //Measure Width
         if (widthMode == MeasureSpec.EXACTLY) {
             //Must be this size
-            width = widthSize;
+            finalWidth = widthSize;
         } else if (widthMode == MeasureSpec.AT_MOST) {
             //Can't be bigger than...
-            width = Math.min(desiredWidth, widthSize);
+            finalWidth = Math.min(desiredWidth, widthSize);
         } else {
             //Be whatever you want
-            width = desiredWidth;
+            finalWidth = desiredWidth;
         }
 
         //Measure Height
         if (heightMode == MeasureSpec.EXACTLY) {
             //Must be this size
-            height = heightSize;
+            finalHeight = heightSize;
         } else if (heightMode == MeasureSpec.AT_MOST) {
             //Can't be bigger than...
-            height = Math.min(desiredHeight, heightSize);
+            finalHeight = Math.min(desiredHeight, heightSize);
         } else {
             //Be whatever you want
-            height = desiredHeight;
+            finalHeight = desiredHeight;
         }
 
-        //MUST CALL THIS
-        setMeasuredDimension(width * 2, height * 2);
+        finalHeight = (finalHeight + (int) convertDpIntoPixel(strokeWidthInDp)) * 2;
+        finalWidth = (finalWidth + (int) convertDpIntoPixel(strokeWidthInDp)) * 2;
+
+        setMeasuredDimension(finalWidth, finalHeight);
     }
 
     @Override
