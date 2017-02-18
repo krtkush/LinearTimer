@@ -8,17 +8,6 @@
     android:layout_height="match_parent"
     tools:context="io.github.krtkush.lineartimeproject.MainActivity">
 
-    <io.github.krtkush.lineartimer.LinearTimerView
-        android:id="@+id/linearTimer"
-        android:layout_centerHorizontal="true"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        timer:radius="20dp"
-        timer:strokeWidth="3dp"
-        timer:startingPoint="270"
-        timer:initialColor="@color/colorPrimary"
-        timer:progressColor="@color/colorAccent"/>
-
     <Button
         android:id="@+id/startTimer"
         android:layout_below="@+id/linearTimer"
@@ -42,5 +31,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"/>
+
+    <io.github.krtkush.lineartimer.LinearTimerView
+        android:id="@+id/linearTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        timer:radius="15dp"
+        timer:strokeWidth="2dp"
+        timer:startingPoint="270"
+        timer:initialColor="@color/colorPrimary"
+        timer:progressColor="@color/colorAccent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
