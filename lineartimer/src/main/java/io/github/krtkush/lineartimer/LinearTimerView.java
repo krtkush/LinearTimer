@@ -23,6 +23,7 @@ public class LinearTimerView extends View {
     private int initialColor;
     private int progressColor;
     private int circleRadiusInDp;
+    private int strokeWidthInDp;
 
     // The point from where the color-fill animation will start.
     private int startingAngle = 270;
@@ -35,23 +36,36 @@ public class LinearTimerView extends View {
         super(context, attrs);
 
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs,
-                R.styleable.LinearTimerView);
+                R.styleable.LinearTimerView, 0, 0);
 
         // Retrieve the view attributes.
-        this.circleRadiusInDp =
-                (int) typedArray.getDimension(R.styleable.LinearTimerView_radius, 5);
-        int strokeWidthInDp =
-                (int) typedArray.getDimension(R.styleable.LinearTimerView_strokeWidth, 2);
-        this.initialColor =
-                typedArray.getColor(R.styleable.LinearTimerView_initialColor,
-                        ContextCompat.getColor(getContext(), R.color.colorInitial));
-        this.progressColor =
-                typedArray.getColor(R.styleable.LinearTimerView_progressColor,
-                        ContextCompat.getColor(getContext(), R.color.colorProgress));
-        this.startingAngle =
-                typedArray.getInt(R.styleable.LinearTimerView_startingPoint, 270);
+        try {
+            this.circleRadiusInDp =
+                    (int) typedArray.getDimension(R.styleable.LinearTimerView_radius, 5);
+            this.strokeWidthInDp =
+                    (int) typedArray.getDimension(R.styleable.LinearTimerView_strokeWidth, 2);
+            this.initialColor =
+                    typedArray.getColor(R.styleable.LinearTimerView_initialColor,
+                            ContextCompat.getColor(getContext(), R.color.colorInitial));
+            this.progressColor =
+                    typedArray.getColor(R.styleable.LinearTimerView_progressColor,
+                            ContextCompat.getColor(getContext(), R.color.colorProgress));
+            this.startingAngle =
+                    typedArray.getInt(R.styleable.LinearTimerView_startingPoint, 270);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            typedArray.recycle();
+        }
 
-        // Define the size of the circle.
+        init();
+    }
+
+    /**
+     *  Define the size of the circle and
+     */
+    protected void init() {
+
         rectF = new RectF(
                 (int) convertDpIntoPixel(strokeWidthInDp),
                 (int) convertDpIntoPixel(strokeWidthInDp),
@@ -64,8 +78,6 @@ public class LinearTimerView extends View {
         arcPaint.setAntiAlias(true);
         arcPaint.setStyle(Paint.Style.STROKE);
         arcPaint.setStrokeWidth((int) convertDpIntoPixel(strokeWidthInDp));
-
-        typedArray.recycle();
     }
 
     @Override
@@ -84,7 +96,10 @@ public class LinearTimerView extends View {
         } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
+
+        invalidate();
     }
+
 
     /**
      * Method to get the degrees up-till which the arc is already pre-filled.
