@@ -18,7 +18,9 @@ public abstract class CountUpTimer {
     private long base;
 
     public CountUpTimer(long duration, long interval) {
-        this.duration = duration;
+        // We are adding extra 3 seconds because otherwise, this timer is
+        // behind the animation (somehow).
+        this.duration = duration + 3000;
         this.interval = interval;
     }
 

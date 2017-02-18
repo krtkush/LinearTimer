@@ -62,7 +62,7 @@ public class LinearTimerView extends View {
     }
 
     /**
-     *  Define the size of the circle and
+     *  Define the size of the circle prepare it's measurement and style.
      */
     protected void init() {
 
