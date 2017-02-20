@@ -42,7 +42,7 @@ In your project's `build.gradle` add the following -
     
 And, in your app's `build.gradle` add this under `dependencies` block -
 
-     compile 'com.github.krtkush:LinearTimer:v2.0.1'
+    compile 'com.github.krtkush:LinearTimer:v2.0.1'
 
 ## Usage
 
