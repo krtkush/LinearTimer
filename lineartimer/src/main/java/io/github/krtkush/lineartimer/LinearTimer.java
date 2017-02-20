@@ -10,20 +10,20 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
     /**
-     * The constant CLOCK_WISE_PROGRESSION.
+     * Constant for builder method `progressDirection()`.
      */
     public static final int CLOCK_WISE_PROGRESSION = 0;
     /**
-     * The constant COUNTER_CLOCK_WISE_PROGRESSION.
+     * Constant for builder method `progressDirection()`.
      */
     public static final int COUNTER_CLOCK_WISE_PROGRESSION = 1;
 
     /**
-     * The constant COUNT_UP_TIMER.
+     * Argument (arg1) for builder method `getCountUpdate()`.
      */
     public static final int COUNT_UP_TIMER = 2;
     /**
-     * The constant COUNT_DOWN_TIMER.
+     * Argument (arg1) for builder method `getCountUpdate()`.
      */
     public static final int COUNT_DOWN_TIMER = 3;
 
@@ -168,7 +168,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     }
 
     /**
-     * This method checks whether a totalDuration has been provided or not.
+     * This method checks whether totalDuration has been provided or not.
      */
     private boolean durationCheck() throws LinearTimerDurationMissingException {
         if (totalDuration == -1)
@@ -250,7 +250,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     }
 
     /**
-     * The type Builder.
+     * Builder class to initialize LinearTimer.
      */
     public static class Builder {
 
@@ -287,7 +287,8 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         }
 
         /**
-         * Not a mandatory field.
+         * Not a mandatory field. Use only if updates regarding animation and timer
+         * ticks are needed.
          *
          * @param timerListener Reference of the class implementing the TimerListener interface.
          * @return the builder
