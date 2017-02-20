@@ -12,8 +12,7 @@ Linear Timer supports following features -
 
 ...and much more.
 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Linear%20Timer-brightgreen.svg?style=social)](https://android-arsenal.com/details/1/4959)  [![Release](https://jitpack.io/v/krtkush/LinearTimer.svg)]
-(https://jitpack.io/#krtkush/LinearTimer)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Linear%20Timer-brightgreen.svg?style=social)](https://android-arsenal.com/details/1/4959)
 
 **If you're using this library, please let me know; I'll feature your app in this readme.**
 
@@ -24,9 +23,12 @@ Linear Timer supports following features -
 ## Versioning
 
 Linear Timer follows the [Semantic Versioning System](http://semver.org/).
-It is currently on version `v2.0.0`.
+It is currently on version `v2.0.1`.
 
 ## Setup
+
+[![Release](https://jitpack.io/v/krtkush/LinearTimer.svg)]
+(https://jitpack.io/#krtkush/LinearTimer)
 
 Setup is pretty straight forward. 
 In your project's `build.gradle` add the following - 
@@ -40,7 +42,7 @@ In your project's `build.gradle` add the following -
     
 And, in your app's `build.gradle` add this under `dependencies` block -
 
-     compile 'com.github.krtkush:LinearTimer:v2.0.0'
+     compile 'com.github.krtkush:LinearTimer:v2.0.1'
 
 ## Usage
 
@@ -53,10 +55,12 @@ First, you need to add `LinearTimerView` into your XML layout -
     <io.github.krtkush.lineartimer.LinearTimerView
         android:id="@+id/linearTimer"
         android:layout_centerHorizontal="true"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:radius="20dp"
         app:strokeWidth="3dp"/>
+        
+Note that "wrap_content" for height and width is the correct argument. Using other values might not lead correct rendering of the view.
 
 After adding the view, here is how the View is initialized and used -
 
