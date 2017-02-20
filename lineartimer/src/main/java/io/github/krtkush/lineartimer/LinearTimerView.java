@@ -14,7 +14,6 @@ import android.view.View;
 /**
  * Created by kartikeykushwaha on 18/12/16.
  */
-
 public class LinearTimerView extends View {
 
     private Paint arcPaint;
@@ -31,6 +30,12 @@ public class LinearTimerView extends View {
     // The point up-till which user wants the circle to be pre-filled.
     private float preFillAngle;
 
+    /**
+     * Instantiates a new Linear timer view.
+     *
+     * @param context the context
+     * @param attrs   the attrs
+     */
     public LinearTimerView(Context context,
                            AttributeSet attrs) {
         super(context, attrs);
@@ -62,7 +67,7 @@ public class LinearTimerView extends View {
     }
 
     /**
-     *  Define the size of the circle prepare it's measurement and style.
+     * Define the size of the circle prepare it's measurement and style.
      */
     protected void init() {
 
@@ -149,24 +154,36 @@ public class LinearTimerView extends View {
 
     /**
      * Method to get the degrees up-till which the arc is already pre-filled.
-     * @return
+     *
+     * @return pre fill angle
      */
     public float getPreFillAngle() {
         return preFillAngle;
     }
 
+    /**
+     * Sets pre fill angle.
+     *
+     * @param preFillAngle the pre fill angle
+     */
     public void setPreFillAngle(float preFillAngle) {
         this.preFillAngle = preFillAngle;
     }
 
     /**
      * Method to get the starting point of the angle
-     * @return
+     *
+     * @return starting point
      */
     public int getStartingPoint() {
         return startingAngle;
     }
 
+    /**
+     * Sets starting point.
+     *
+     * @param startingPointInDegrees the starting point in degrees
+     */
     public void setStartingPoint(int startingPointInDegrees) {
         this.startingAngle = startingPointInDegrees;
     }
