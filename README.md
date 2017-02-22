@@ -60,7 +60,7 @@ First, you need to add `LinearTimerView` into your XML layout -
         app:radius="20dp"
         app:strokeWidth="3dp"/>
         
-Note that `"wrap_content"` for `height` and `width` is the correct argument. Using other values might not lead incorrect rendering of the view on different devices.
+Note that `"wrap_content"` for `height` and `width` is the correct argument. Using other values might lead incorrect rendering of the view on different devices.
 
 After adding the view, here is how the View is initialized and used -
 
