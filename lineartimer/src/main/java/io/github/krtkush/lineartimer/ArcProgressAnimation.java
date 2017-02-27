@@ -13,7 +13,6 @@ public class ArcProgressAnimation extends Animation {
 
     private float startingAngle;
     private float endingAngle;
-
     private TimerListener timerListener;
 
     public ArcProgressAnimation(LinearTimerView linearTimerView, int endingAngle,

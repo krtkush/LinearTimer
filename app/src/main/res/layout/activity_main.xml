@@ -28,8 +28,32 @@
         android:text="Start"/>
 
     <Button
-        android:id="@+id/restartTimer"
+        android:id="@+id/pauseTimer"
         android:layout_below="@+id/startTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Pause"/>
+
+    <Button
+        android:id="@+id/resumeTimer"
+        android:layout_below="@+id/pauseTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="resume"/>
+
+    <Button
+        android:id="@+id/resetTimer"
+        android:layout_below="@+id/resumeTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Reset"/>
+
+    <Button
+        android:id="@+id/restartTimer"
+        android:layout_below="@+id/resetTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
