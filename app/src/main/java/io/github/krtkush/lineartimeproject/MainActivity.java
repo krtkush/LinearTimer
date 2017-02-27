@@ -32,14 +32,19 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
                 .progressDirection(LinearTimer.COUNTER_CLOCK_WISE_PROGRESSION)
                 .preFillAngle(0)
                 .endingAngle(360)
-                .getCountUpdate(LinearTimer.COUNT_DOWN_TIMER, 500)
+                .getCountUpdate(LinearTimer.COUNT_UP_TIMER, 500)
                 .build();
 
         // Start the timer.
         findViewById(R.id.startTimer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                linearTimer.startTimer();
+                try {
+                    linearTimer.startTimer();
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

@@ -28,7 +28,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     private long updateInterval;
 
     private LinearTimerCountDownTimer countDownTimer;
-    private CountUpTimer countUpTimer;
+    private LinearTimerCountUpTimer countUpTimer;
 
     /**
      * A boolean to track which state LinerTimer is in currently. The boolean is updated
@@ -102,8 +102,11 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
 //                linearTimerView.setPreFillAngle(linearTimerView.getPreFillAngle());
                 linearTimerView.invalidate();
 
-                //Cancel the countdown timer so it stops counting up/down
-                countDownTimer.cancel();
+                //Cancel the CountDown/CountUp timer so it stops counting up/down
+                if(countType == COUNT_DOWN_TIMER)
+                    countDownTimer.cancel();
+                else if(countType == COUNT_UP_TIMER)
+                    countUpTimer.stop();
             } else
                 throw new IllegalStateException("LinearTimer is not in active right now.");
         }
@@ -120,22 +123,32 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
                 //The animation is reinitialized with the linearTimerView, the ending angle and duration
                 //is set to pending time left from the timer
                 arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle, this);
-                arcProgressAnimation.setDuration(countDownTimer.getMillisLeftUntilFinished());
+                if(countType == COUNT_DOWN_TIMER)
+                    arcProgressAnimation.setDuration(countDownTimer.getMillisLeftUntilFinished());
+                else if(countType == COUNT_UP_TIMER)
+                    arcProgressAnimation.setDuration(countUpTimer.getTimeLeft());
+                //re-initialize the countdown timer with the pending millis from previous instance
+                //and start
+                if(countType == COUNT_DOWN_TIMER) {
+                    countDownTimer = new LinearTimerCountDownTimer(
+                            countDownTimer.getMillisLeftUntilFinished(),
+                            updateInterval,
+                            timerListener);
+                    countDownTimer.start();
+                } else if(countType == COUNT_UP_TIMER) {
+                    countUpTimer = new LinearTimerCountUpTimer(
+                            animationDuration,
+                            updateInterval,
+                            timerListener
+                    );
+                    countUpTimer.start();
+                }
 
                 //The LinearTimerView's prefill is reset to as it was when it was paused
-//                linearTimerView.setPreFillAngle(linearTimerView.getPreFillAngle());
                 linearTimerView.setAnimation(arcProgressAnimation);
 
                 //Start animation again
                 arcProgressAnimation.start();
-
-                //re-initialize the countdown timer with the pending millis from previous instance
-                //and start
-                countDownTimer = new LinearTimerCountDownTimer(
-                        countDownTimer.getMillisLeftUntilFinished(),
-                        updateInterval,
-                        timerListener);
-                countDownTimer.start();
             } else
                 throw new IllegalStateException("LinearTimer is not in paused state right now.");
         }
@@ -320,7 +333,8 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
                     break;
 
                 case COUNT_UP_TIMER:
-                    setCountUpTimer(animationDuration);
+                    countUpTimer = new LinearTimerCountUpTimer(animationDuration, updateInterval, timerListener);
+                    countUpTimer.start();
                     break;
             }
         }
@@ -362,7 +376,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      */
     @Deprecated
     private void setCountUpTimer(final long runningTimeInMilliseconds) {
-        countUpTimer = new CountUpTimer(runningTimeInMilliseconds, updateInterval) {
+        countUpTimer = new LinearTimerCountUpTimer(runningTimeInMilliseconds, updateInterval) {
 
             @Override
             public void onTick(long elapsedTime) {
