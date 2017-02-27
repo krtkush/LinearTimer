@@ -99,7 +99,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
                 //Clear animations off of linearTimerView, set prefillAngle to current state and refresh view
                 linearTimerView.clearAnimation();
-//                linearTimerView.setPreFillAngle(linearTimerView.getPreFillAngle());
+                linearTimerView.setPreFillAngle(linearTimerView.getPreFillAngle());
                 linearTimerView.invalidate();
 
                 //Cancel the CountDown/CountUp timer so it stops counting up/down
@@ -137,7 +137,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
                     countDownTimer.start();
                 } else if(countType == COUNT_UP_TIMER) {
                     countUpTimer = new LinearTimerCountUpTimer(
-                            animationDuration,
+                            countUpTimer.getTimeLeft(),
                             updateInterval,
                             timerListener
                     );
@@ -182,10 +182,13 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
                 //Store the current status code in intStatusCode integer
                 intStatusCode = LinearTimerStatus.ACTIVE.getStaus();
 
-                //Cancel the circle animation
-                arcProgressAnimation.cancel();
                 //Reset the pre filling angle as passed by user during initialization
                 linearTimerView.setPreFillAngle(preFillAngle);
+
+                arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle, this);
+                arcProgressAnimation.setDuration(animationDuration);
+                //Cancel the circle animation
+                arcProgressAnimation.cancel();
                 //Start arc animation on the timerView
                 linearTimerView.startAnimation(arcProgressAnimation);
 
@@ -211,7 +214,11 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
                 linearTimerView.invalidate();
 
                 //Cancel the countdown timer so it stops counting up/down
-                countDownTimer.cancel();
+                if(countType == COUNT_DOWN_TIMER)
+                    countDownTimer.cancel();
+                else if(countType == COUNT_UP_TIMER)
+                    countUpTimer.stop();
+
                 //Inform listeners the timer was reset
                 timerListener.onTimerReset();
             } else
