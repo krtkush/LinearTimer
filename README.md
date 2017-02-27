@@ -12,7 +12,7 @@ Linear Timer supports following features -
 
 ...and much more.
 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Linear%20Timer-brightgreen.svg?style=social)](https://android-arsenal.com/details/1/4959)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Linear%20Timer-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/4959)
 
 **If you're using this library, please let me know; I'll feature your app in this readme.**
 
@@ -42,7 +42,7 @@ In your project's `build.gradle` add the following -
     
 And, in your app's `build.gradle` add this under `dependencies` block -
 
-     compile 'com.github.krtkush:LinearTimer:v2.0.1'
+    compile 'com.github.krtkush:LinearTimer:v2.0.1'
 
 ## Usage
 
@@ -60,7 +60,7 @@ First, you need to add `LinearTimerView` into your XML layout -
         app:radius="20dp"
         app:strokeWidth="3dp"/>
         
-Note that "wrap_content" for height and width is the correct argument. Using other values might not lead correct rendering of the view.
+Note that `"wrap_content"` for `height` and `width` is the correct argument. Using other values might lead incorrect rendering of the view on different devices.
 
 After adding the view, here is how the View is initialized and used -
 
