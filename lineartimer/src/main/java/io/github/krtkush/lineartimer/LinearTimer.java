@@ -99,7 +99,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     }
 
     /**
-     * Method to reset the timer to start angle and then start the progress again.
+     * Reset the timer to start angle and then start the progress again.
      */
     public void restartTimer() {
 
