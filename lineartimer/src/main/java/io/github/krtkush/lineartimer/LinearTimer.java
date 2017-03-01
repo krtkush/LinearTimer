@@ -106,7 +106,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
                 if(countType == COUNT_DOWN_TIMER)
                     countDownTimer.cancel();
                 else if(countType == COUNT_UP_TIMER)
-                    countUpTimer.stop();
+                    countUpTimer.pause();
             } else
                 throw new IllegalStateException("LinearTimer is not in active right now.");
         }
@@ -127,6 +127,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
                     arcProgressAnimation.setDuration(countDownTimer.getMillisLeftUntilFinished());
                 else if(countType == COUNT_UP_TIMER)
                     arcProgressAnimation.setDuration(countUpTimer.getTimeLeft());
+
                 //re-initialize the countdown timer with the pending millis from previous instance
                 //and start
                 if(countType == COUNT_DOWN_TIMER) {
@@ -135,14 +136,8 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
                             updateInterval,
                             timerListener);
                     countDownTimer.start();
-                } else if(countType == COUNT_UP_TIMER) {
-                    countUpTimer = new LinearTimerCountUpTimer(
-                            countUpTimer.getTimeLeft(),
-                            updateInterval,
-                            timerListener
-                    );
-                    countUpTimer.start();
-                }
+                } else if(countType == COUNT_UP_TIMER)
+                    countUpTimer.resume();
 
                 //The LinearTimerView's prefill is reset to as it was when it was paused
                 linearTimerView.setAnimation(arcProgressAnimation);
