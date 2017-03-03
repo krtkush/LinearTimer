@@ -1,5 +1,6 @@
 package io.github.krtkush.lineartimeproject;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -23,6 +24,12 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
 
         LinearTimerView linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
         time = (TextView) findViewById(R.id.time);
+
+        linearTimerView.setStrokeWidthInDp(5);
+        linearTimerView.setCircleRadiusInDp(40);
+        linearTimerView.setStartingPoint(90);
+        linearTimerView.setInitialColor(Color.BLACK);
+        linearTimerView.setProgressColor(Color.GREEN);
 
         linearTimer = new LinearTimer.Builder()
                 .linearTimerView(linearTimerView)

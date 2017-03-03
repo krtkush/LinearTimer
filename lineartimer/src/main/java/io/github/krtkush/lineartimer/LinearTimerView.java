@@ -25,7 +25,7 @@ public class LinearTimerView extends View {
     private int strokeWidthInDp;
 
     // The point from where the color-fill animation will start.
-    private int startingAngle = 270;
+    private int startingPoint = 270;
 
     // The point up-till which user wants the circle to be pre-filled.
     private float preFillAngle;
@@ -55,7 +55,7 @@ public class LinearTimerView extends View {
             this.progressColor =
                     typedArray.getColor(R.styleable.LinearTimerView_progressColor,
                             ContextCompat.getColor(getContext(), R.color.colorProgress));
-            this.startingAngle =
+            this.startingPoint =
                     typedArray.getInt(R.styleable.LinearTimerView_startingPoint, 270);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -95,7 +95,7 @@ public class LinearTimerView extends View {
 
             // Green Arc (Arc with 360 angle) - This circle will be animated as time progresses.
             arcPaint.setColor(progressColor);
-            canvas.drawArc(rectF, startingAngle, preFillAngle, false, arcPaint);
+            canvas.drawArc(rectF, startingPoint, preFillAngle, false, arcPaint);
         } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
@@ -157,7 +157,7 @@ public class LinearTimerView extends View {
      *
      * @return pre fill angle
      */
-    public float getPreFillAngle() {
+    protected float getPreFillAngle() {
         return preFillAngle;
     }
 
@@ -166,26 +166,73 @@ public class LinearTimerView extends View {
      *
      * @param preFillAngle the pre fill angle
      */
-    public void setPreFillAngle(float preFillAngle) {
+    protected void setPreFillAngle(float preFillAngle) {
         this.preFillAngle = preFillAngle;
     }
 
-    /**
-     * Method to get the starting point of the angle
-     *
-     * @return starting point
-     */
-    public int getStartingPoint() {
-        return startingAngle;
+    public int getInitialColor() {
+        return initialColor;
     }
 
-    /**
-     * Sets starting point.
-     *
-     * @param startingPointInDegrees the starting point in degrees
-     */
-    public void setStartingPoint(int startingPointInDegrees) {
-        this.startingAngle = startingPointInDegrees;
+    public void setInitialColor(int initialColor) {
+        this.initialColor = initialColor;
+
+        // Redraw the view.
+        invalidate();
+        requestLayout();
+        init();
+    }
+
+    public int getProgressColor() {
+        return progressColor;
+    }
+
+    public void setProgressColor(int progressColor) {
+        this.progressColor = progressColor;
+
+        // Redraw the view.
+        invalidate();
+        requestLayout();
+        init();
+    }
+
+    public int getCircleRadiusInDp() {
+        return circleRadiusInDp;
+    }
+
+    public void setCircleRadiusInDp(int circleRadiusInDp) {
+        this.circleRadiusInDp = circleRadiusInDp;
+
+        // Redraw the view.
+        invalidate();
+        requestLayout();
+        init();
+    }
+
+    public int getStrokeWidthInDp() {
+        return strokeWidthInDp;
+    }
+
+    public void setStrokeWidthInDp(int strokeWidthInDp) {
+        this.strokeWidthInDp = strokeWidthInDp;
+
+        // Redraw the view.
+        invalidate();
+        requestLayout();
+        init();
+    }
+
+    public int getStartingPoint() {
+        return startingPoint;
+    }
+
+    public void setStartingPoint(int startingPoint) {
+        this.startingPoint = startingPoint;
+
+        // Redraw the view.
+        invalidate();
+        requestLayout();
+        init();
     }
 
     /**
