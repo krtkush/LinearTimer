@@ -6,55 +6,72 @@ import android.os.SystemClock;
 
 /**
  * Created by kartikeykushwaha on 02/02/17.
- * <p>
+ * 
  * CountUpTimer is similar to the Android CountDownTimer in respect to implementation and
  * behaviour.
  */
 public abstract class CountUpTimer {
 
-    private final long duration;
+    /**
+     * Tracks when the counter is paused
+     */
+    private static long pauseStart;
+
+    /**
+     * Tracks when the counter is resumed
+     */
+    private static long pauseEnd;
+
+    /**
+     * tracks what was the elapsed pause time
+     */
+    private static long elapsedPausedTime;
+    private long duration;
     private final long interval;
     private long base;
 
-    /**
-     * Instantiates a new Count up timer.
-     *
-     * @param duration the duration
-     * @param interval the interval
-     */
     public CountUpTimer(long duration, long interval) {
-        // We are adding extra 3 seconds because otherwise, this timer is
-        // behind the animation (somehow).
-        this.duration = duration + 3000;
+        this.duration = duration;
         this.interval = interval;
     }
 
-    /**
-     * Start.
-     */
     public void start() {
         base = SystemClock.elapsedRealtime();
         handler.sendMessage(handler.obtainMessage(MSG));
     }
 
-    /**
-     * Stop.
-     */
     public void stop() {
         handler.removeMessages(MSG);
         onFinish();
     }
 
     /**
-     * On tick.
-     *
-     * @param elapsedTime the elapsed time
+     * Pauses the count up timer by removing the callbacks to the handler and stores
+     * the time stamp when the pause button was tapped
      */
-    abstract public void onTick(long elapsedTime);
+    public void pause() {
+        handler.removeMessages(MSG);
+        pauseStart = SystemClock.elapsedRealtime();
+    }
 
     /**
-     * On finish.
+     * Resumes the count up timer by re initiating the callbacks to the handler and stores
+     * when the resume button was tapped on.
+     * Since we have the pause and resume times, we can calculate the elapsed time in paused state.
+     * Once we retrieve the total time spent in paused state, we add it to the base variable. (simple maths)
      */
+    public void resume() {
+        //Store resume time
+        pauseEnd = SystemClock.elapsedRealtime();
+        //calculate elapsed paused time
+        elapsedPausedTime = pauseEnd - pauseStart;
+        //Add paused time to base time stamp
+        base += elapsedPausedTime;
+        handler.sendMessage(handler.obtainMessage(MSG));
+    }
+
+    abstract public void onTick(long elapsedTime);
+
     abstract public void onFinish();
 
     private static final int MSG = 1;
@@ -63,14 +80,27 @@ public abstract class CountUpTimer {
         @Override
         public void handleMessage(Message msg) {
             synchronized (CountUpTimer.this) {
-                long elapsedTime = SystemClock.elapsedRealtime() - base;
+                long elapsedTime;
 
-                onTick(elapsedTime);
-                sendMessageDelayed(obtainMessage(MSG), interval);
+                elapsedTime = SystemClock.elapsedRealtime() - base;
 
+                //if elapsed paused time is not zero, reset them to zero to begin tracking
+                //any further instances of pause button being tapped on
+                if(elapsedPausedTime != 0L){
+                    elapsedPausedTime = 0L;
+                    pauseStart = 0L;
+                    pauseEnd = 0L;
+                }
+
+                //If condition set up to hinder onTick callBacks being sent if elapsedtime somehow is more than
+                //the duration.
                 // Stop the timer if it has run for the required duration.
-                if(elapsedTime >= duration)
+                if(elapsedTime >= duration) {
                     stop();
+                } else {
+                    onTick(elapsedTime);
+                    sendMessageDelayed(obtainMessage(MSG), interval);
+                }
             }
         }
     };

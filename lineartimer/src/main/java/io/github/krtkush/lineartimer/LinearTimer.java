@@ -38,6 +38,16 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     private long animationDuration;
     private long updateInterval;
 
+    private LinearTimerCountDownTimer countDownTimer;
+    private LinearTimerCountUpTimer countUpTimer;
+
+    /**
+     * A boolean to track which state LinerTimer is in currently. The boolean is updated
+     * constantly as and when the state changes
+     * Package level access given
+     */
+    static int intStatusCode;
+
     private LinearTimer(Builder builder) {
 
         this.linearTimerView = builder.linearTimerView;
@@ -61,6 +71,9 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
             // Set the pre-fill angle.
             linearTimerView.setPreFillAngle(preFillAngle);
 
+            //Store the current status code in intStatusCode integer
+            intStatusCode = LinearTimerStatus.INITIALIZED.getStaus();
+
             // If the user wants to show the progress in counter clock wise manner,
             // we flip the view on its Y-Axis and let it function as is.
             if (builder.progressDirection == COUNTER_CLOCK_WISE_PROGRESSION) {
@@ -83,14 +96,106 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     }
 
     /**
+     * A method to pause the running timer.
+     * @throws IllegalStateException IllegalStateException is thrown if the user tries to pause
+     * a timer that is not in the ACTIVE state.
+     */
+    public void pauseTimer() throws IllegalStateException {
+        if (basicParametersCheck()) {
+            //timer may be paused only in active state
+            if (intStatusCode == LinearTimerStatus.ACTIVE.getStaus()) {
+
+                //Store the current status code in intStatusCode integer
+                intStatusCode = LinearTimerStatus.PAUSED.getStaus();
+
+                //Clear animations off of linearTimerView, set prefillAngle to current state and refresh view
+                linearTimerView.clearAnimation();
+                linearTimerView.setPreFillAngle(linearTimerView.getPreFillAngle());
+                linearTimerView.invalidate();
+
+                //Cancel the CountDown/CountUp timer so it stops counting up/down
+                if(countType == COUNT_DOWN_TIMER)
+                    countDownTimer.cancel();
+                else if(countType == COUNT_UP_TIMER)
+                    countUpTimer.pause();
+            } else
+                throw new IllegalStateException("LinearTimer is not in active right now.");
+        }
+    }
+
+    public void resumeTimer() throws IllegalStateException {
+        if (basicParametersCheck()) {
+            if (intStatusCode == LinearTimerStatus.PAUSED.getStaus()) {
+
+                //Store the current status code in intStatusCode integer
+                intStatusCode = LinearTimerStatus.ACTIVE.getStaus();
+
+                //Reinitialize the animations as it may not be simply continued.
+                //The animation is reinitialized with the linearTimerView, the ending angle and duration
+                //is set to pending time left from the timer
+                arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle, this);
+                if(countType == COUNT_DOWN_TIMER)
+                    arcProgressAnimation.setDuration(countDownTimer.getMillisLeftUntilFinished());
+                else if(countType == COUNT_UP_TIMER)
+                    arcProgressAnimation.setDuration(countUpTimer.getTimeLeft());
+
+                //re-initialize the countdown timer with the pending millis from previous instance
+                //and start
+                if(countType == COUNT_DOWN_TIMER) {
+                    countDownTimer = new LinearTimerCountDownTimer(
+                            countDownTimer.getMillisLeftUntilFinished(),
+                            updateInterval,
+                            timerListener);
+                    countDownTimer.start();
+                } else if(countType == COUNT_UP_TIMER)
+                    countUpTimer.resume();
+
+                //The LinearTimerView's prefill is reset to as it was when it was paused
+                linearTimerView.setAnimation(arcProgressAnimation);
+
+                //Start animation again
+                arcProgressAnimation.start();
+            } else
+                throw new IllegalStateException("LinearTimer is not in paused state right now.");
+        }
+    }
+
+    /**
      * Method to start the timer.
      */
     public void startTimer() {
 
         if (basicParametersCheck()) {
-            if (arcProgressAnimation == null) {
+            if (intStatusCode == LinearTimerStatus.INITIALIZED.getStaus()) {
+                //Store the current status code in intStatusCode integer
+                intStatusCode = LinearTimerStatus.ACTIVE.getStaus();
                 arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle, this);
                 arcProgressAnimation.setDuration(animationDuration);
+                linearTimerView.startAnimation(arcProgressAnimation);
+
+                checkForCountUpdate();
+            } else
+                throw new IllegalStateException("LinearTimer is not in INITIALIZED state right now.");
+        }
+    }
+
+    /**
+     * Reset the timer to start angle and then start the progress again.
+     */
+    public void restartTimer() {
+        if (basicParametersCheck()) {
+            if (arcProgressAnimation != null) {
+                //Store the current status code in intStatusCode integer
+                intStatusCode = LinearTimerStatus.ACTIVE.getStaus();
+
+                //Reset the pre filling angle as passed by user during initialization
+                linearTimerView.setPreFillAngle(preFillAngle);
+
+                arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle, this);
+                arcProgressAnimation.setDuration(animationDuration);
+                //Cancel the circle animation
+                arcProgressAnimation.cancel();
+                //Start arc animation on the timerView
                 linearTimerView.startAnimation(arcProgressAnimation);
 
                 checkForCountUpdate();
@@ -99,25 +204,69 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     }
 
     /**
-     * Reset the timer to start angle and then start the progress again.
+     * Method to reset the LinearTimer to start angle only
      */
-    public void restartTimer() {
-
+    public void resetTimer() {
         if (basicParametersCheck()) {
-            if (arcProgressAnimation != null) {
-                arcProgressAnimation.cancel();
-                linearTimerView.startAnimation(arcProgressAnimation);
+            if (intStatusCode == LinearTimerStatus.PAUSED.getStaus()
+                    || intStatusCode == LinearTimerStatus.FINISHED.getStaus()) {
+                //Store the current status code in intStatusCode integer
+                intStatusCode = LinearTimerStatus.INITIALIZED.getStaus();
 
-                checkForCountUpdate();
-            }
+                //Cancel the circle animation
+                arcProgressAnimation.cancel();
+                //Reset the pre filling angle as passed by user during initialization
+                linearTimerView.setPreFillAngle(preFillAngle);
+                linearTimerView.invalidate();
+
+                //Cancel the countdown timer so it stops counting up/down
+                if(countType == COUNT_DOWN_TIMER)
+                    countDownTimer.cancel();
+                else if(countType == COUNT_UP_TIMER)
+                    countUpTimer.stop();
+
+                //Inform listeners the timer was reset
+                timerListener.onTimerReset();
+            } else
+                throw new IllegalStateException("Cannot reset when LinearTimer is in ACTIVE or INITIALIZED state.");
+        }
+    }
+
+    /**
+     * A method that determines the current state of LinearTimer. One of the following is returned
+     * 1) Initialized
+     * 2) Active
+     * 3) Paused
+     * 4) Finished
+     * @return Returns an enum that defines the current state of the LinearTimer.
+     */
+    public LinearTimerStatus getState() {
+        switch (intStatusCode) {
+            case 0:
+                return LinearTimerStatus.INITIALIZED;
+
+            case 1:
+                return LinearTimerStatus.ACTIVE;
+
+            case 2:
+                return LinearTimerStatus.PAUSED;
+
+            case 3:
+                return LinearTimerStatus.FINISHED;
+
+            default:
+                return LinearTimerStatus.INITIALIZED;
         }
     }
 
     @Override
     public void animationComplete() {
         try {
-            if (listenerCheck())
+            if (listenerCheck()) {
+                //Store the current status code in intStatusCode integer
+                intStatusCode = LinearTimerStatus.FINISHED.getStaus();
                 timerListener.animationComplete();
+            }
         } catch (LinearTimerListenerMissingException ex) {
             ex.printStackTrace();
         }
@@ -138,6 +287,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
          * @param tickUpdateInMillis the tick update in millis
          */
         void timerTick(long tickUpdateInMillis);
+        void onTimerReset();
     }
 
     /**
@@ -199,11 +349,14 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
             switch (countType) {
 
                 case COUNT_DOWN_TIMER:
-                    setCountDownTimer(animationDuration);
+                    countDownTimer = new
+                            LinearTimerCountDownTimer(animationDuration, updateInterval, timerListener);
+                    countDownTimer.start();
                     break;
 
                 case COUNT_UP_TIMER:
-                    setCountUpTimer(animationDuration);
+                    countUpTimer = new LinearTimerCountUpTimer(animationDuration, updateInterval, timerListener);
+                    countUpTimer.start();
                     break;
             }
         }
@@ -212,10 +365,13 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     /**
      * Method to setup the countdown timer which returns time left (in milliseconds) for the timer
      * to end.
+     *
+     * Method is deprecated. Initialize Timer inline with the constructor that accepts three parameters
      * @param timeLeftInMillis the time in millis for which the timer should run.
      */
+    @Deprecated
     private void setCountDownTimer(long timeLeftInMillis) {
-        new CountDownTimer(timeLeftInMillis, updateInterval) {
+        countDownTimer = new LinearTimerCountDownTimer(timeLeftInMillis, updateInterval) {
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -224,18 +380,25 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
             @Override
             public void onFinish() {
-                timerListener.timerTick(0);
+                if(intStatusCode != LinearTimerStatus.PAUSED.getStaus())
+                    timerListener.timerTick(0);
             }
-        }.start();
+        };
+
+        countDownTimer.start();
     }
 
     /**
      * Method to setup the countup timer which returns the time elapsed since the timer has started.
      * The timer stops when it has run for the required duration.
+     *
+     * Method is deprecated. Initialize Timer inline with the constructor that accepts three parameters
+     *
      * @param runningTimeInMilliseconds the time in millis for which the timer should run.
      */
+    @Deprecated
     private void setCountUpTimer(final long runningTimeInMilliseconds) {
-        new CountUpTimer(runningTimeInMilliseconds, updateInterval) {
+        countUpTimer = new LinearTimerCountUpTimer(runningTimeInMilliseconds, updateInterval) {
 
             @Override
             public void onTick(long elapsedTime) {
@@ -246,7 +409,9 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
             public void onFinish() {
                 timerListener.timerTick(runningTimeInMilliseconds);
             }
-        }.start();
+        };
+
+        countUpTimer.start();
     }
 
     /**

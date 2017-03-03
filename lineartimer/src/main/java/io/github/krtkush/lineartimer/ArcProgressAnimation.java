@@ -12,7 +12,6 @@ public class ArcProgressAnimation extends Animation {
 
     private float startingAngle;
     private float endingAngle;
-
     private TimerListener timerListener;
 
     /**

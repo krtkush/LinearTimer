@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.concurrent.TimeUnit;
 
@@ -26,19 +27,24 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
 
         linearTimer = new LinearTimer.Builder()
                 .linearTimerView(linearTimerView)
-                .duration(10 * 1000)
+                .duration(15 * 1000)
                 .timerListener(this)
                 .progressDirection(LinearTimer.COUNTER_CLOCK_WISE_PROGRESSION)
                 .preFillAngle(0)
                 .endingAngle(360)
-                .getCountUpdate(LinearTimer.COUNT_UP_TIMER, 1000)
+                .getCountUpdate(LinearTimer.COUNT_UP_TIMER, 500)
                 .build();
 
         // Start the timer.
         findViewById(R.id.startTimer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                linearTimer.startTimer();
+                try {
+                    linearTimer.startTimer();
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -47,6 +53,45 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
             @Override
             public void onClick(View view) {
                 linearTimer.restartTimer();
+            }
+        });
+
+        //Pause the timer
+        findViewById(R.id.pauseTimer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    linearTimer.pauseTimer();
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        //resume the timer
+        findViewById(R.id.resumeTimer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    linearTimer.resumeTimer();
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        //Reset the timer
+        findViewById(R.id.resetTimer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    linearTimer.resetTimer();
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -67,5 +112,10 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
                         .toSeconds(TimeUnit.MILLISECONDS.toHours(tickUpdateInMillis)));
 
         time.setText(formattedTime);
+    }
+
+    @Override
+    public void onTimerReset() {
+        time.setText("");
     }
 }
