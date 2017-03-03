@@ -117,27 +117,27 @@ public class LinearTimerView extends View {
         int finalWidth;
         int finalHeight;
 
-        //Measure Width
+        // Measure Width
         if (widthMode == MeasureSpec.EXACTLY) {
-            //Must be this size
+            // Must be this size
             finalWidth = widthSize;
         } else if (widthMode == MeasureSpec.AT_MOST) {
-            //Can't be bigger than...
+            // Can't be bigger than...
             finalWidth = Math.min(desiredWidth, widthSize);
         } else {
-            //Be whatever you want
+            // Be whatever you want
             finalWidth = desiredWidth;
         }
 
-        //Measure Height
+        // Measure Height
         if (heightMode == MeasureSpec.EXACTLY) {
-            //Must be this size
+            // Must be this size
             finalHeight = heightSize;
         } else if (heightMode == MeasureSpec.AT_MOST) {
-            //Can't be bigger than...
+            // Can't be bigger than...
             finalHeight = Math.min(desiredHeight, heightSize);
         } else {
-            //Be whatever you want
+            // Be whatever you want
             finalHeight = desiredHeight;
         }
 
