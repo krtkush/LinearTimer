@@ -28,11 +28,13 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
         linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
         time = (TextView) findViewById(R.id.time);
 
-        linearTimerView.setStrokeWidthInDp(5);
+        // Assign attribute values to the view programmatically
+        // This will override the attributes set via the XML.
+        /*linearTimerView.setStrokeWidthInDp(5);
         linearTimerView.setCircleRadiusInDp(40);
         linearTimerView.setStartingPoint(90);
         linearTimerView.setInitialColor(Color.BLACK);
-        linearTimerView.setProgressColor(Color.GREEN);
+        linearTimerView.setProgressColor(Color.GREEN);*/
 
         linearTimer = new LinearTimer.Builder()
                 .linearTimerView(linearTimerView)
