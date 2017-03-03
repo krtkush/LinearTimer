@@ -170,10 +170,18 @@ public class LinearTimerView extends View {
         this.preFillAngle = preFillAngle;
     }
 
+    /**
+     * Get the current set initial color.
+     * @return
+     */
     public int getInitialColor() {
         return initialColor;
     }
 
+    /**
+     * Method to set the initial color programmatically.
+     * @param initialColor
+     */
     public void setInitialColor(int initialColor) {
         this.initialColor = initialColor;
 
@@ -183,10 +191,18 @@ public class LinearTimerView extends View {
         init();
     }
 
+    /**
+     * Get the current set progress color.
+     * @return
+     */
     public int getProgressColor() {
         return progressColor;
     }
 
+    /**
+     * Method to set the progress color programmatically.
+     * @param progressColor
+     */
     public void setProgressColor(int progressColor) {
         this.progressColor = progressColor;
 
@@ -196,10 +212,18 @@ public class LinearTimerView extends View {
         init();
     }
 
+    /**
+     * Get the current radius.
+     * @return
+     */
     public int getCircleRadiusInDp() {
         return circleRadiusInDp;
     }
 
+    /**
+     * Method to set the radius programmatically.
+     * @param circleRadiusInDp
+     */
     public void setCircleRadiusInDp(int circleRadiusInDp) {
         this.circleRadiusInDp = circleRadiusInDp;
 
@@ -209,10 +233,18 @@ public class LinearTimerView extends View {
         init();
     }
 
+    /**
+     * Get the current width of the stroke.
+     * @return
+     */
     public int getStrokeWidthInDp() {
         return strokeWidthInDp;
     }
 
+    /**
+     * Method to set the stroke width programmatically.
+     * @param strokeWidthInDp
+     */
     public void setStrokeWidthInDp(int strokeWidthInDp) {
         this.strokeWidthInDp = strokeWidthInDp;
 
@@ -222,10 +254,18 @@ public class LinearTimerView extends View {
         init();
     }
 
+    /**
+     * Get the current starting point.
+     * @return
+     */
     public int getStartingPoint() {
         return startingPoint;
     }
 
+    /**
+     * Method to set the starting point programmatically.
+     * @param startingPoint
+     */
     public void setStartingPoint(int startingPoint) {
         this.startingPoint = startingPoint;
 
