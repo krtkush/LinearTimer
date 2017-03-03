@@ -33,7 +33,7 @@ public class LinearTimerCountDownTimer extends CountDownTimer {
 
     @Override
     public void onFinish() {
-        if (LinearTimer.intStatusCode != LinearTimerStatus.PAUSED.getStaus())
+        if (LinearTimer.intStatusCode != LinearTimerStates.PAUSED.getStaus())
             timerListener.timerTick(0);
     }
 
