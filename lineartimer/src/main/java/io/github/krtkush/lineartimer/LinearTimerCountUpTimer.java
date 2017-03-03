@@ -26,7 +26,7 @@ public class LinearTimerCountUpTimer extends CountUpTimer {
 
     @Override
     public void onFinish() {
-        if (LinearTimer.intStatusCode != LinearTimerStatus.PAUSED.getStaus())
+        if (LinearTimer.intStatusCode != LinearTimerStates.PAUSED.getStaus())
             timerListener.timerTick(timerDuration);
     }
 

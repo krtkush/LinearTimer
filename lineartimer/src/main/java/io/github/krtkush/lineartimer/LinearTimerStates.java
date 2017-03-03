@@ -4,7 +4,7 @@ package io.github.krtkush.lineartimer;
  * The enum status codes holds the various states of LinearTimer. It may be used to diversify
  * user flow depending on which state the timer is in.
  */
-public enum LinearTimerStatus {
+public enum LinearTimerStates {
 
     /**
      * The initialized state is when LinearTimer has not run even once and/or .reset() method was executed.
@@ -34,14 +34,14 @@ public enum LinearTimerStatus {
     FINISHED(3);
 
     /**
-     * An integer to hold the integer representation of each of the statuses defined in LinearTimerStatus enum.
+     * An integer to hold the integer representation of each of the statuses defined in LinearTimerStates enum.
      */
     private int intStatusCode;
 
-    //The constructor for LinearTimerStatus enum that accepts an integer type parameter from each of the
-    //statuses on the LinearTimerStatus enum and assigns it to intStatusCode integer which may be returned
+    //The constructor for LinearTimerStates enum that accepts an integer type parameter from each of the
+    //statuses on the LinearTimerStates enum and assigns it to intStatusCode integer which may be returned
     //by getStats() method
-    LinearTimerStatus(int intStatus) {
+    LinearTimerStates(int intStatus) {
         intStatusCode = intStatus;
     }
 
