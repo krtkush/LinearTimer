@@ -1,5 +1,6 @@
 package io.github.krtkush.lineartimeproject;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,20 +15,28 @@ import io.github.krtkush.lineartimer.LinearTimerView;
 
 public class MainActivity extends AppCompatActivity implements LinearTimer.TimerListener {
 
+    private LinearTimerView linearTimerView;
     private LinearTimer linearTimer;
     private TextView time;
+    private long duration = 10 * 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LinearTimerView linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
+        linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
         time = (TextView) findViewById(R.id.time);
+
+        linearTimerView.setStrokeWidthInDp(5);
+        linearTimerView.setCircleRadiusInDp(40);
+        linearTimerView.setStartingPoint(90);
+        linearTimerView.setInitialColor(Color.BLACK);
+        linearTimerView.setProgressColor(Color.GREEN);
 
         linearTimer = new LinearTimer.Builder()
                 .linearTimerView(linearTimerView)
-                .duration(10 * 1000)
+                .duration(duration)
                 .timerListener(this)
                 .progressDirection(LinearTimer.COUNTER_CLOCK_WISE_PROGRESSION)
                 .preFillAngle(0)
@@ -110,6 +119,9 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
                 TimeUnit.MILLISECONDS.toSeconds(tickUpdateInMillis)
                         - TimeUnit.MINUTES
                         .toSeconds(TimeUnit.MILLISECONDS.toHours(tickUpdateInMillis)));
+
+        if(tickUpdateInMillis >= duration / 2)
+            linearTimerView.setProgressColor(Color.RED);
 
         time.setText(formattedTime);
     }

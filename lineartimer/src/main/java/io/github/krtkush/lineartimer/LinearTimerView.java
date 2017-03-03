@@ -25,7 +25,7 @@ public class LinearTimerView extends View {
     private int strokeWidthInDp;
 
     // The point from where the color-fill animation will start.
-    private int startingAngle = 270;
+    private int startingPoint = 270;
 
     // The point up-till which user wants the circle to be pre-filled.
     private float preFillAngle;
@@ -55,7 +55,7 @@ public class LinearTimerView extends View {
             this.progressColor =
                     typedArray.getColor(R.styleable.LinearTimerView_progressColor,
                             ContextCompat.getColor(getContext(), R.color.colorProgress));
-            this.startingAngle =
+            this.startingPoint =
                     typedArray.getInt(R.styleable.LinearTimerView_startingPoint, 270);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -95,7 +95,7 @@ public class LinearTimerView extends View {
 
             // Green Arc (Arc with 360 angle) - This circle will be animated as time progresses.
             arcPaint.setColor(progressColor);
-            canvas.drawArc(rectF, startingAngle, preFillAngle, false, arcPaint);
+            canvas.drawArc(rectF, startingPoint, preFillAngle, false, arcPaint);
         } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
@@ -157,7 +157,7 @@ public class LinearTimerView extends View {
      *
      * @return pre fill angle
      */
-    public float getPreFillAngle() {
+    protected float getPreFillAngle() {
         return preFillAngle;
     }
 
@@ -166,26 +166,113 @@ public class LinearTimerView extends View {
      *
      * @param preFillAngle the pre fill angle
      */
-    public void setPreFillAngle(float preFillAngle) {
+    protected void setPreFillAngle(float preFillAngle) {
         this.preFillAngle = preFillAngle;
     }
 
     /**
-     * Method to get the starting point of the angle
-     *
-     * @return starting point
+     * Get the current set initial color.
+     * @return
      */
-    public int getStartingPoint() {
-        return startingAngle;
+    public int getInitialColor() {
+        return initialColor;
     }
 
     /**
-     * Sets starting point.
-     *
-     * @param startingPointInDegrees the starting point in degrees
+     * Method to set the initial color programmatically.
+     * @param initialColor
      */
-    public void setStartingPoint(int startingPointInDegrees) {
-        this.startingAngle = startingPointInDegrees;
+    public void setInitialColor(int initialColor) {
+        this.initialColor = initialColor;
+
+        // Redraw the view.
+        invalidate();
+        requestLayout();
+        init();
+    }
+
+    /**
+     * Get the current set progress color.
+     * @return
+     */
+    public int getProgressColor() {
+        return progressColor;
+    }
+
+    /**
+     * Method to set the progress color programmatically.
+     * @param progressColor
+     */
+    public void setProgressColor(int progressColor) {
+        this.progressColor = progressColor;
+
+        // Redraw the view.
+        invalidate();
+        requestLayout();
+        init();
+    }
+
+    /**
+     * Get the current radius.
+     * @return
+     */
+    public int getCircleRadiusInDp() {
+        return circleRadiusInDp;
+    }
+
+    /**
+     * Method to set the radius programmatically.
+     * @param circleRadiusInDp
+     */
+    public void setCircleRadiusInDp(int circleRadiusInDp) {
+        this.circleRadiusInDp = circleRadiusInDp;
+
+        // Redraw the view.
+        invalidate();
+        requestLayout();
+        init();
+    }
+
+    /**
+     * Get the current width of the stroke.
+     * @return
+     */
+    public int getStrokeWidthInDp() {
+        return strokeWidthInDp;
+    }
+
+    /**
+     * Method to set the stroke width programmatically.
+     * @param strokeWidthInDp
+     */
+    public void setStrokeWidthInDp(int strokeWidthInDp) {
+        this.strokeWidthInDp = strokeWidthInDp;
+
+        // Redraw the view.
+        invalidate();
+        requestLayout();
+        init();
+    }
+
+    /**
+     * Get the current starting point.
+     * @return
+     */
+    public int getStartingPoint() {
+        return startingPoint;
+    }
+
+    /**
+     * Method to set the starting point programmatically.
+     * @param startingPoint
+     */
+    public void setStartingPoint(int startingPoint) {
+        this.startingPoint = startingPoint;
+
+        // Redraw the view.
+        invalidate();
+        requestLayout();
+        init();
     }
 
     /**
