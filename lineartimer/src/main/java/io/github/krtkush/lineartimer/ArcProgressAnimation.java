@@ -6,7 +6,6 @@ import android.view.animation.Transformation;
 /**
  * Created by kartikeykushwaha on 18/12/16.
  */
-
 public class ArcProgressAnimation extends Animation {
 
     private LinearTimerView linearTimerView;
@@ -15,6 +14,13 @@ public class ArcProgressAnimation extends Animation {
     private float endingAngle;
     private TimerListener timerListener;
 
+    /**
+     * Instantiates a new Arc progress animation.
+     *
+     * @param linearTimerView the linear timer view
+     * @param endingAngle     the ending angle
+     * @param timerListener   the timer listener
+     */
     public ArcProgressAnimation(LinearTimerView linearTimerView, int endingAngle,
                                 TimerListener timerListener) {
         this.startingAngle = linearTimerView.getPreFillAngle();
@@ -41,6 +47,9 @@ public class ArcProgressAnimation extends Animation {
      * Interface to inform the implementing class about events wrt timer.
      */
     public interface TimerListener {
+        /**
+         * Animation complete.
+         */
         void animationComplete();
     }
 }

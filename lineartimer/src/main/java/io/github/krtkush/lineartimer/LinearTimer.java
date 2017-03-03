@@ -7,13 +7,24 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 /**
  * Created by kartikeykushwaha on 18/12/16.
  */
-
 public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
+    /**
+     * Constant for builder method `progressDirection()`.
+     */
     public static final int CLOCK_WISE_PROGRESSION = 0;
+    /**
+     * Constant for builder method `progressDirection()`.
+     */
     public static final int COUNTER_CLOCK_WISE_PROGRESSION = 1;
 
+    /**
+     * Argument (arg1) for builder method `getCountUpdate()`.
+     */
     public static final int COUNT_UP_TIMER = 2;
+    /**
+     * Argument (arg1) for builder method `getCountUpdate()`.
+     */
     public static final int COUNT_DOWN_TIMER = 3;
 
     private LinearTimerView linearTimerView;
@@ -169,7 +180,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     }
 
     /**
-     * Method to reset the timer to start angle and then start the progress again.
+     * Reset the timer to start angle and then start the progress again.
      */
     public void restartTimer() {
         if (basicParametersCheck()) {
@@ -265,7 +276,16 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      * Interface to inform the implementing class about events wrt timer.
      */
     public interface TimerListener {
+        /**
+         * Animation complete.
+         */
         void animationComplete();
+
+        /**
+         * Timer tick.
+         *
+         * @param tickUpdateInMillis the tick update in millis
+         */
         void timerTick(long tickUpdateInMillis);
         void onTimerReset();
     }
@@ -298,7 +318,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     }
 
     /**
-     * This method checks whether a totalDuration has been provided or not.
+     * This method checks whether totalDuration has been provided or not.
      */
     private boolean durationCheck() throws LinearTimerDurationMissingException {
         if (totalDuration == -1)
@@ -394,6 +414,9 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         countUpTimer.start();
     }
 
+    /**
+     * Builder class to initialize LinearTimer.
+     */
     public static class Builder {
 
         private int progressDirection = LinearTimer.CLOCK_WISE_PROGRESSION;
@@ -408,9 +431,9 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
         /**
          * Not a mandatory field. Default is clock wise progression.
-         * @param progressDirection Clock wise or anti-clock wise direction of the progress.
-         *                          LinearTimer.CLOCK_WISE_PROGRESSION
-         *                          or LinearTimer.COUNTER_CLOCK_WISE_PROGRESSION
+         *
+         * @param progressDirection Clock wise or anti-clock wise direction of the progress.                          LinearTimer.CLOCK_WISE_PROGRESSION                          or LinearTimer.COUNTER_CLOCK_WISE_PROGRESSION
+         * @return the builder
          */
         public Builder progressDirection(int progressDirection) {
             this.progressDirection = progressDirection;
@@ -419,7 +442,9 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
         /**
          * A mandatory field.
+         *
          * @param linearTimerView The reference to the view.
+         * @return the builder
          */
         public Builder linearTimerView(LinearTimerView linearTimerView) {
             this.linearTimerView = linearTimerView;
@@ -427,8 +452,11 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         }
 
         /**
-         * Not a mandatory field.
+         * Not a mandatory field. Use only if updates regarding animation and timer
+         * ticks are needed.
+         *
          * @param timerListener Reference of the class implementing the TimerListener interface.
+         * @return the builder
          */
         public Builder timerListener(TimerListener timerListener) {
             this.timerListener = timerListener;
@@ -437,7 +465,9 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
         /**
          * Not a mandatory field.
+         *
          * @param preFillAngle Angle up-till which the circle should be pre-filled.
+         * @return the builder
          */
         public Builder preFillAngle(float preFillAngle) {
             this.preFillAngle = preFillAngle;
@@ -446,9 +476,10 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
         /**
          * A mandatory field. Duration for which the user wants
-         *                      to run the timer for.
+         * to run the timer for.
+         *
          * @param totalDuration in milliseconds,
-         * @return
+         * @return builder
          */
         public Builder duration(long totalDuration) {
             this.totalDuration = totalDuration;
@@ -460,8 +491,10 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
          * When the user wants to continue the timer animation from a certain point and that point
          * is in respect to the time elapsed. USe of this method will override the `preFillAngle`
          * value.
+         *
          * @param totalDuration in milliseconds.
-         * @param timeElapsed in milliseconds.
+         * @param timeElapsed   in milliseconds.
+         * @return the builder
          */
         public Builder duration(long totalDuration, long timeElapsed) {
             this.totalDuration = totalDuration;
@@ -471,7 +504,9 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
         /**
          * Not a mandatory field.
+         *
          * @param endingAngle The angle at which the user wants the animation to end.
+         * @return the builder
          */
         public Builder endingAngle(int endingAngle) {
             this.endingAngle = endingAngle;
@@ -482,10 +517,10 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
          * Not a mandatory field.
          * This enables the LinearTimer library to return time elapsed or time left depending on the
          * type of timer applied.
-         * @param countType The type of timer the user wants to show;
-         *                  LinearTimer.COUNT_UP_TIMER or LinearTimer.COUNT_DOWN_TIMER.
-         * @param updateInterval Duration (in millis) after which user wants the updates.
-         *                       Should be > 0.
+         *
+         * @param countType      The type of timer the user wants to show;                  LinearTimer.COUNT_UP_TIMER or LinearTimer.COUNT_DOWN_TIMER.
+         * @param updateInterval Duration (in millis) after which user wants the updates.                       Should be > 0.
+         * @return the count update
          */
         public Builder getCountUpdate(int countType, long updateInterval) {
             this.countType = countType;
@@ -493,6 +528,11 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
             return this;
         }
 
+        /**
+         * Build linear timer.
+         *
+         * @return the linear timer
+         */
         public LinearTimer build() {
             return new LinearTimer(this);
         }
@@ -503,6 +543,11 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      */
     private class LinearTimerViewMissingException extends Exception {
 
+        /**
+         * Instantiates a new Linear timer view missing exception.
+         *
+         * @param message the message
+         */
         LinearTimerViewMissingException (String message) {
             super(message);
         }
@@ -513,6 +558,11 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      */
     private class LinearTimerDurationMissingException extends Exception {
 
+        /**
+         * Instantiates a new Linear timer duration missing exception.
+         *
+         * @param message the message
+         */
         LinearTimerDurationMissingException(String message) {
             super(message);
         }
@@ -524,6 +574,11 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      */
     private class LinearTimerListenerMissingException extends Exception {
 
+        /**
+         * Instantiates a new Linear timer listener missing exception.
+         *
+         * @param message the message
+         */
         LinearTimerListenerMissingException(String message) {
             super(message);
         }
