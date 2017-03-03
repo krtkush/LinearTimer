@@ -26,12 +26,22 @@ public abstract class CountUpTimer {
      * tracks what was the elapsed pause time
      */
     private static long elapsedPausedTime;
+
+    /**
+     * Duration for which the timer should run.
+     */
     private long duration;
+
+    /**
+     * Duration after which the time update should be sent.
+     */
     private final long interval;
     private long base;
 
     public CountUpTimer(long duration, long interval) {
-        this.duration = duration;
+        // Reduce the time duration by 1000 millis so as to make sure that tha animation and
+        // counter finish at the same time.
+        this.duration = duration - 1000;
         this.interval = interval;
     }
 
@@ -61,11 +71,11 @@ public abstract class CountUpTimer {
      * Once we retrieve the total time spent in paused state, we add it to the base variable. (simple maths)
      */
     public void resume() {
-        //Store resume time
+        // Store resume time
         pauseEnd = SystemClock.elapsedRealtime();
-        //calculate elapsed paused time
+        // Calculate elapsed paused time
         elapsedPausedTime = pauseEnd - pauseStart;
-        //Add paused time to base time stamp
+        // Add paused time to base time stamp
         base += elapsedPausedTime;
         handler.sendMessage(handler.obtainMessage(MSG));
     }
@@ -84,16 +94,16 @@ public abstract class CountUpTimer {
 
                 elapsedTime = SystemClock.elapsedRealtime() - base;
 
-                //if elapsed paused time is not zero, reset them to zero to begin tracking
-                //any further instances of pause button being tapped on
+                // If elapsed paused time is not zero, reset them to zero so as to begin tracking
+                // any further instances of pause button being tapped on
                 if(elapsedPausedTime != 0L){
                     elapsedPausedTime = 0L;
                     pauseStart = 0L;
                     pauseEnd = 0L;
                 }
 
-                //If condition set up to hinder onTick callBacks being sent if elapsedtime somehow is more than
-                //the duration.
+                // If condition set up to hinder onTick callBacks being sent if
+                // elapsedtime somehow is more than the duration.
                 // Stop the timer if it has run for the required duration.
                 if(elapsedTime >= duration) {
                     stop();

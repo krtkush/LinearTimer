@@ -1,7 +1,7 @@
 package io.github.krtkush.lineartimer;
 
 /**
- * The enum status codes enum holds the various states of LinearTimer. It may be used to diversify
+ * The enum status codes holds the various states of LinearTimer. It may be used to diversify
  * user flow depending on which state the timer is in.
  */
 public enum LinearTimerStatus {
