@@ -23,7 +23,6 @@ Linear Timer supports following features -
 ## Versioning
 
 Linear Timer follows the [Semantic Versioning System](http://semver.org/).
-It is currently on version `v2.0.1`.
 
 ## Setup
 
@@ -42,7 +41,9 @@ In your project's `build.gradle` add the following -
     
 And, in your app's `build.gradle` add this under `dependencies` block -
 
-    compile 'com.github.krtkush:LinearTimer:v2.0.1'
+    compile 'com.github.krtkush:LinearTimer:<version_available_on_jitpack>'
+    
+example - `compile 'com.github.krtkush:LinearTimer:v2.1.0'`
 
 ## Usage
 
