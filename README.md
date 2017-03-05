@@ -125,6 +125,15 @@ After adding the view, here is how it is initialized and used -
            }
        }
     });
+   
+List of methods available to control the timer -
+| | Method | Description |
+|---|---|---|---|
+|1.|startTimer()|Start the timer.|
+|2.|pauseTimer()|Pause the timer.|
+|3.|resumeTimer()|Resume the timer from its pause position.|
+|4.|resetTimer()|Reset the timer to the starting angle; the timer will not start after reset.|
+|5.|restartTimer()|Restart the timer from the starting angle; the timer will start again.|
 
 For detailed documentation and on how to customise and use LinearTimer please [refer to the wiki](https://github.com/krtkush/LinearTimer/wiki).
 
