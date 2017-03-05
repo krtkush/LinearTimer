@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
             }
         });
 
-        //Pause the timer
+        // Pause the timer
         findViewById(R.id.pauseTimer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
             }
         });
 
-        //resume the timer
+        // Resume the timer
         findViewById(R.id.resumeTimer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
             }
         });
 
-        //Reset the timer
+        // Reset the timer
         findViewById(R.id.resetTimer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
