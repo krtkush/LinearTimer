@@ -14,7 +14,7 @@ Linear Timer supports following features -
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Linear%20Timer-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/4959)
 
-**If you're using this library, please let me know; I'll feature your app in this readme.**
+**If you're using this library, please let me know; I'll feature your app in the wiki.**
 
 ## Screenshots
 
