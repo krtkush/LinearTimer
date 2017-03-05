@@ -127,6 +127,7 @@ After adding the view, here is how it is initialized and used -
     });
    
 List of methods available to control the timer -
+
 | | Method | Description |
 |---|---|---|---|
 |1.|startTimer()|Start the timer.|
