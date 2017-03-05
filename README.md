@@ -23,7 +23,6 @@ Linear Timer supports following features -
 ## Versioning
 
 Linear Timer follows the [Semantic Versioning System](http://semver.org/).
-It is currently on version `v2.0.1`.
 
 ## Setup
 
@@ -42,44 +41,102 @@ In your project's `build.gradle` add the following -
     
 And, in your app's `build.gradle` add this under `dependencies` block -
 
-    compile 'com.github.krtkush:LinearTimer:v2.0.1'
+    compile 'com.github.krtkush:LinearTimer:<version_available_on_jitpack>'
+    
+example - `compile 'com.github.krtkush:LinearTimer:v2.1.0'`
 
 ## Usage
 
-Following is how you can implement LinearTimer in its simplest form.
-
 First, you need to add `LinearTimerView` into your XML layout -
 
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:timer="http://schemas.android.com/apk/res-auto"
 
     <io.github.krtkush.lineartimer.LinearTimerView
         android:id="@+id/linearTimer"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:radius="20dp"
-        app:strokeWidth="3dp"/>
-        
-Note that `"wrap_content"` for `height` and `width` is the correct argument. Using other values might lead incorrect rendering of the view on different devices.
+        timer:radius="20dp"
+        timer:strokeWidth="3dp"/>
 
-After adding the view, here is how the View is initialized and used -
+Note that `"wrap_content"` for height and width is recommended. Using other values might not lead correct rendering of the view.
 
-     LinearTimerView linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
+After adding the view, here is how it is initialized and used -
 
-     LinearTimer linearTimer = new LinearTimer.Builder()
+    LinearTimerView linearTimerView = (LinearTimerView)
+                                        findViewById(R.id.linearTimer);
+
+    LinearTimer linearTimer = new LinearTimer.Builder()
                 .linearTimerView(linearTimerView)
                 .duration(10 * 1000)
                 .build();
 
-     // Start the timer.
-     findViewById(R.id.startTimer).setOnClickListener(new View.OnClickListener() {
+    // Start the timer.
+    findViewById(R.id.startTimer).setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          linearTimer.startTimer();
+        }
+    });
+
+    // Restart the timer.
+    findViewById(R.id.restartTimer).setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
-            linearTimer.startTimer();
-           }
+            linearTimer.restartTimer();
+          }
+    });
+
+    // Pause the timer
+    findViewById(R.id.pauseTimer).setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+             try {
+                linearTimer.pauseTimer();
+             } catch (IllegalStateException e) {
+                e.printStackTrace();
+                Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+             }
+          }
      });
 
-For detailed documentation and on how to customise and use LinearTimer [see the wiki](https://github.com/krtkush/LinearTimer/wiki).
+    // Resume the timer
+    findViewById(R.id.resumeTimer).setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+              try {
+                linearTimer.resumeTimer();
+              } catch (IllegalStateException e) {
+                  e.printStackTrace();
+                  Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+              }
+          }
+     });
+
+    // Reset the timer
+    findViewById(R.id.resetTimer).setOnClickListener(new View.OnClickListener() {
+       @Override
+       public void onClick(View v) {
+           try {
+               linearTimer.resetTimer();
+           } catch (IllegalStateException e) {
+               e.printStackTrace();
+               Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+           }
+       }
+    });
+   
+List of methods available to control the timer -
+
+| | Method | Description |
+|---|---|---|---|
+|1.|startTimer()|Start the timer.|
+|2.|pauseTimer()|Pause the timer.|
+|3.|resumeTimer()|Resume the timer from its pause position.|
+|4.|resetTimer()|Reset the timer to the starting angle; the timer will not start after reset.|
+|5.|restartTimer()|Restart the timer from the starting angle; the timer will start again.|
+
+For detailed documentation and on how to customise and use LinearTimer please [refer to the wiki](https://github.com/krtkush/LinearTimer/wiki).
 
 ## Contribution
 
