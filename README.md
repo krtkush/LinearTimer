@@ -126,7 +126,7 @@ After adding the view, here is how it is initialized and used -
        }
     });
 
-For detailed documentation and on how to customise and use LinearTimer [see the wiki](https://github.com/krtkush/LinearTimer/wiki).
+For detailed documentation and on how to customise and use LinearTimer please [refer to the wiki](https://github.com/krtkush/LinearTimer/wiki).
 
 ## Contribution
 
