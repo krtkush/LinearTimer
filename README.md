@@ -142,3 +142,5 @@ For detailed documentation and on how to customise and use LinearTimer please [r
 ## Contribution
 
 Any kind of contribution will be appreciated; feel free to create a pull request or file issues on the issue tracker.
+
+List of current contributors can be found [here](https://github.com/krtkush/LinearTimer/graphs/contributors).
