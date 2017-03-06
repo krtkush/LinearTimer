@@ -128,13 +128,14 @@ After adding the view, here is how it is initialized and used -
    
 List of methods available to control the timer -
 
-| | Method | Description |
-|---|---|---|---|
-|1.|startTimer()|Start the timer.|
-|2.|pauseTimer()|Pause the timer.|
-|3.|resumeTimer()|Resume the timer from its pause position.|
-|4.|resetTimer()|Reset the timer to the starting angle; the timer will not start after reset.|
-|5.|restartTimer()|Restart the timer from the starting angle; the timer will start again.|
+| | Method | Description | Exception |
+|---|---|---|---|---|
+|1.|[startTimer()](https://github.com/krtkush/LinearTimer/wiki/Usage#start)|Start the timer.|IllegalStateException|
+|2.|[pauseTimer()](https://github.com/krtkush/LinearTimer/wiki/Usage#pause)|Pause the timer.|IllegalStateException|
+|3.|[resumeTimer()](https://github.com/krtkush/LinearTimer/wiki/Usage#resume)|Resume the timer from its pause position.|IllegalStateException|
+|4.|[resetTimer()](https://github.com/krtkush/LinearTimer/wiki/Usage#reset)|Reset the timer to the starting angle; the timer will not start after reset.|IllegalStateException|
+|5.|[restartTimer()](https://github.com/krtkush/LinearTimer/wiki/Usage#restart)|Restart the timer from the starting angle; the timer will start again.|None|
+|5.|[getState()](https://github.com/krtkush/LinearTimer/wiki/Usage#timer-states)|Get current state of the timer.|None|
 
 For detailed documentation and on how to customise and use LinearTimer please [refer to the wiki](https://github.com/krtkush/LinearTimer/wiki).
 
