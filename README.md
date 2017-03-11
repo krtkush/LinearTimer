@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/krtkush/LinearTimer/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
+
 # Linear Timer
 
 Linear Timer is a custom view for Android that enables circular progress animation with respect to given duration.
