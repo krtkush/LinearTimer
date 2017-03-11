@@ -8,64 +8,72 @@
     android:layout_height="match_parent"
     tools:context="io.github.krtkush.lineartimeproject.MainActivity">
 
-    <Button
-        android:id="@+id/startTimer"
-        android:layout_below="@+id/linearTimer"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Start"/>
+        android:layout_centerInParent="true">
 
-    <Button
-        android:id="@+id/pauseTimer"
-        android:layout_below="@+id/startTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Pause"/>
+        <Button
+            android:id="@+id/startTimer"
+            android:layout_below="@+id/linearTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Start"/>
 
-    <Button
-        android:id="@+id/resumeTimer"
-        android:layout_below="@+id/pauseTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="resume"/>
+        <Button
+            android:id="@+id/pauseTimer"
+            android:layout_below="@+id/startTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Pause"/>
 
-    <Button
-        android:id="@+id/resetTimer"
-        android:layout_below="@+id/resumeTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Reset"/>
+        <Button
+            android:id="@+id/resumeTimer"
+            android:layout_below="@+id/pauseTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="resume"/>
 
-    <Button
-        android:id="@+id/restartTimer"
-        android:layout_below="@+id/resetTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Restart"/>
+        <Button
+            android:id="@+id/resetTimer"
+            android:layout_below="@+id/resumeTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Reset"/>
 
-    <TextView
-        android:id="@+id/time"
-        android:layout_below="@id/restartTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true"/>
+        <Button
+            android:id="@+id/restartTimer"
+            android:layout_below="@+id/resetTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Restart"/>
 
-    <io.github.krtkush.lineartimer.LinearTimerView
-        android:id="@+id/linearTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        timer:radius="20dp"
-        timer:strokeWidth="2dp"
-        timer:startingPoint="270"
-        timer:initialColor="@color/colorPrimary"
-        timer:progressColor="@color/colorInitial"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        <TextView
+            android:id="@+id/time"
+            android:layout_below="@id/restartTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"/>
+
+        <io.github.krtkush.lineartimer.LinearTimerView
+            android:id="@+id/linearTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            timer:radius="20dp"
+            timer:strokeWidth="2dp"
+            timer:startingPoint="270"
+            timer:initialColor="@color/colorPrimary"
+            timer:progressColor="@color/colorInitial"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+
+    </RelativeLayout>
 
 </RelativeLayout>

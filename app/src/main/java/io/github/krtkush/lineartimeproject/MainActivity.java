@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
                         - TimeUnit.MINUTES
                         .toSeconds(TimeUnit.MILLISECONDS.toHours(tickUpdateInMillis)));
 
+        // Change color of the progress bar when half of the duration is complete.
         if(tickUpdateInMillis >= duration / 2)
             linearTimerView.setProgressColor(Color.RED);
 
