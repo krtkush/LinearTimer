@@ -39,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:textSize="16sp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="@string/about_three"/>
 
 </RelativeLayout>

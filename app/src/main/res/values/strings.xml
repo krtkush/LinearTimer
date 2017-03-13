@@ -3,5 +3,5 @@
     <string name="about_one">This is a demo app for Linear Timer.</string>
     <string name="about_two">Linear Timer is a custom view library for Android that creates circular
         progress animation with respect to a given duration. </string>
-    <string name="about_three">Know more about Linear Timer on Github. Click here.</string>
+    <string name="about_three">Know more about Linear Timer on Github; Click here.</string>
 </resources>
