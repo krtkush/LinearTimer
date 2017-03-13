@@ -14,6 +14,8 @@ Linear Timer supports following features -
 
 ...and much more.
 
+Download the [demo app from the Play Store](https://play.google.com/store/apps/details?id=io.github.krtkush.lineartimeproject).
+
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Linear%20Timer-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/4959)
 
 **If you're using this library, please let me know; I'll feature your app in the wiki.**
