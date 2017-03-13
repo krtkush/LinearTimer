@@ -15,7 +15,7 @@
 
         <Button
             android:id="@+id/startTimer"
-            android:layout_below="@+id/linearTimer"
+            android:layout_below="@+id/timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -53,25 +53,32 @@
             android:layout_centerInParent="true"
             android:text="Restart"/>
 
-        <TextView
-            android:id="@+id/time"
-            android:layout_below="@id/restartTimer"
+        <RelativeLayout
+            android:id="@+id/timer"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_centerHorizontal="true"/>
+            android:layout_height="wrap_content">
 
-        <io.github.krtkush.lineartimer.LinearTimerView
-            android:id="@+id/linearTimer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            timer:radius="20dp"
-            timer:strokeWidth="2dp"
-            timer:startingPoint="270"
-            timer:initialColor="@color/colorPrimary"
-            timer:progressColor="@color/colorInitial"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"/>
+
+            <io.github.krtkush.lineartimer.LinearTimerView
+                android:id="@+id/linearTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                timer:radius="20dp"
+                timer:strokeWidth="2dp"
+                timer:startingPoint="270"
+                timer:initialColor="@color/colorPrimary"
+                timer:progressColor="@color/colorInitial"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+
+        </RelativeLayout>
 
 
     </RelativeLayout>
