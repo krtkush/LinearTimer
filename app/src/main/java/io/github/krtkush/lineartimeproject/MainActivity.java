@@ -1,6 +1,5 @@
 package io.github.krtkush.lineartimeproject;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
                 .linearTimerView(linearTimerView)
                 .duration(duration)
                 .timerListener(this)
-                .progressDirection(LinearTimer.COUNTER_CLOCK_WISE_PROGRESSION)
+                .progressDirection(LinearTimer.CLOCK_WISE_PROGRESSION)
                 .preFillAngle(0)
                 .endingAngle(360)
                 .getCountUpdate(LinearTimer.COUNT_UP_TIMER, 1000)
@@ -121,10 +120,6 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
                 TimeUnit.MILLISECONDS.toSeconds(tickUpdateInMillis)
                         - TimeUnit.MINUTES
                         .toSeconds(TimeUnit.MILLISECONDS.toHours(tickUpdateInMillis)));
-
-        // Change color of the progress bar when half of the duration is complete.
-        if(tickUpdateInMillis >= duration / 2)
-            linearTimerView.setProgressColor(Color.RED);
 
         time.setText(formattedTime);
     }
