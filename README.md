@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/krtkush/LinearTimer/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
+<img src="https://raw.githubusercontent.com/krtkush/LinearTimer/master/lineartimer/src/main/res/drawable/high_res_icon.png" />
 
 # Linear Timer
 
