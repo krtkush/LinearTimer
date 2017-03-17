@@ -135,8 +135,9 @@ After adding the view, here is how it is initialized and used -
    
 List of methods available to control the timer -
 
+
 | | Method | Description | Exception |
-|---|---|---|---|---|
+|---|---|---|---|
 |1.|[startTimer()](https://github.com/krtkush/LinearTimer/wiki/Usage#start)|Start the timer.|IllegalStateException|
 |2.|[pauseTimer()](https://github.com/krtkush/LinearTimer/wiki/Usage#pause)|Pause the timer.|IllegalStateException|
 |3.|[resumeTimer()](https://github.com/krtkush/LinearTimer/wiki/Usage#resume)|Resume the timer from its pause position.|IllegalStateException|
