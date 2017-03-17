@@ -33,6 +33,7 @@ Linear Timer follows the [Semantic Versioning System](http://semver.org/).
 
 ## Setup
 
+
 [![Release](https://jitpack.io/v/krtkush/LinearTimer.svg)]
 (https://jitpack.io/#krtkush/LinearTimer)
 
