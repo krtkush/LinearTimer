@@ -34,8 +34,7 @@ Linear Timer follows the [Semantic Versioning System](http://semver.org/).
 ## Setup
 
 
-[![Release](https://jitpack.io/v/krtkush/LinearTimer.svg)]
-(https://jitpack.io/#krtkush/LinearTimer)
+[![Release](https://jitpack.io/v/krtkush/LinearTimer.svg)](https://jitpack.io/#krtkush/LinearTimer)
 
 Setup is pretty straight forward. 
 In your project's `build.gradle` add the following - 
