@@ -1,4 +1,7 @@
-<img src="https://raw.githubusercontent.com/krtkush/LinearTimer/master/lineartimer/src/main/res/drawable/high_res_icon.png" height="200" width="200"/>
+<img src="https://raw.githubusercontent.com/krtkush/LinearTimer/master/lineartimer/src/main/res/drawable/high_res_icon.png" height="200" width="200"/> 
+
+<a href="http://www.methodscount.com/?lib=com.github.krtkush%3ALinearTimer%3Av2.1.0"><img src="https://img.shields.io/badge/Methods and size-core: 165 | deps: 19164 | 31 KB-e91e63.svg"/></a> [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Linear%20Timer-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/4959)
+
 
 # Linear Timer
 
@@ -17,10 +20,6 @@ Linear Timer supports following features -
 Download the demo app -
 
 <a href='https://play.google.com/store/apps/details?id=io.github.krtkush.lineartimeproject&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width="160" height="65"></a>
-
-<a href="http://www.methodscount.com/?lib=com.github.krtkush%3ALinearTimer%3Av2.1.0"><img src="https://img.shields.io/badge/Methods and size-core: 165 | deps: 19164 | 31 KB-e91e63.svg"/></a>
-
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Linear%20Timer-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/4959)
 
 **If you're using this library, please let me know; I'll feature your app in the wiki.**
 
