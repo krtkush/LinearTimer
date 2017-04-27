@@ -97,6 +97,25 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     }
 
     /**
+     * Method to start the timer.
+     */
+    public void startTimer() {
+
+        if (basicParametersCheck()) {
+            if (intStatusCode == LinearTimerStates.INITIALIZED.getStaus()) {
+                // Store the current status code in intStatusCode integer
+                intStatusCode = LinearTimerStates.ACTIVE.getStaus();
+                arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle, this);
+                arcProgressAnimation.setDuration(animationDuration);
+                linearTimerView.startAnimation(arcProgressAnimation);
+
+                checkForCountUpdate();
+            } else
+                throw new IllegalStateException("LinearTimer is not in INITIALIZED state right now.");
+        }
+    }
+
+    /**
      * A method to pause the running timer.
      * @throws IllegalStateException IllegalStateException is thrown if the user tries to pause
      * a timer that is not in the ACTIVE state.
@@ -164,25 +183,6 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
                 arcProgressAnimation.start();
             } else
                 throw new IllegalStateException("LinearTimer is not in paused state right now.");
-        }
-    }
-
-    /**
-     * Method to start the timer.
-     */
-    public void startTimer() {
-
-        if (basicParametersCheck()) {
-            if (intStatusCode == LinearTimerStates.INITIALIZED.getStaus()) {
-                // Store the current status code in intStatusCode integer
-                intStatusCode = LinearTimerStates.ACTIVE.getStaus();
-                arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle, this);
-                arcProgressAnimation.setDuration(animationDuration);
-                linearTimerView.startAnimation(arcProgressAnimation);
-
-                checkForCountUpdate();
-            } else
-                throw new IllegalStateException("LinearTimer is not in INITIALIZED state right now.");
         }
     }
 
@@ -351,23 +351,20 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      */
     private void checkForCountUpdate() {
 
-        if (countType != -1) {
+        switch (countType) {
 
-            switch (countType) {
+            case COUNT_DOWN_TIMER:
+                countDownTimer = new
+                        LinearTimerCountDownTimer(animationDuration,
+                        updateInterval, timerListener);
+                countDownTimer.start();
+                break;
 
-                case COUNT_DOWN_TIMER:
-                    countDownTimer = new
-                            LinearTimerCountDownTimer(animationDuration,
-                            updateInterval, timerListener);
-                    countDownTimer.start();
-                    break;
-
-                case COUNT_UP_TIMER:
-                    countUpTimer = new LinearTimerCountUpTimer(animationDuration,
-                            updateInterval, timerListener);
-                    countUpTimer.start();
-                    break;
-            }
+            case COUNT_UP_TIMER:
+                countUpTimer = new LinearTimerCountUpTimer(animationDuration,
+                        updateInterval, timerListener);
+                countUpTimer.start();
+                break;
         }
     }
 

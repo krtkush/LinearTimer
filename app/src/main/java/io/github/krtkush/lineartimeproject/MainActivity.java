@@ -42,11 +42,6 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
         linearTimer = new LinearTimer.Builder()
                 .linearTimerView(linearTimerView)
                 .duration(duration)
-                .timerListener(this)
-                .progressDirection(LinearTimer.CLOCK_WISE_PROGRESSION)
-                .preFillAngle(0)
-                .endingAngle(360)
-                .getCountUpdate(LinearTimer.COUNT_UP_TIMER, 1000)
                 .build();
 
         // Start the timer.
