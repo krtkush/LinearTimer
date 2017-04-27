@@ -111,7 +111,8 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
 
                 checkForCountUpdate();
             } else
-                throw new IllegalStateException("LinearTimer is not in INITIALIZED state right now.");
+                throw new IllegalStateException
+                        ("LinearTimer is not in INITIALIZED state right now.");
         }
     }
 
@@ -157,8 +158,8 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
                 intStatusCode = LinearTimerStates.ACTIVE.getStaus();
 
                 // Reinitialize the animations as it may not be simply continued.
-                // The animation is reinitialized with the linearTimerView, the ending angle and duration
-                // is set to pending time left from the timer.
+                // The animation is reinitialized with the linearTimerView,
+                // the ending angle and duration is set to pending time left from the timer.
                 arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle, this);
                 if(countType == COUNT_DOWN_TIMER)
                     arcProgressAnimation.setDuration(countDownTimer.getMillisLeftUntilFinished());
@@ -235,7 +236,8 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
                 //Inform listeners the timer was reset
                 timerListener.onTimerReset();
             } else
-                throw new IllegalStateException("Cannot reset when LinearTimer is in ACTIVE or INITIALIZED state.");
+                throw new IllegalStateException
+                        ("Cannot reset when LinearTimer is in ACTIVE or INITIALIZED state.");
         }
     }
 
@@ -366,58 +368,6 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
                 countUpTimer.start();
                 break;
         }
-    }
-
-    /**
-     * Method to setup the countdown timer which returns time left (in milliseconds) for the timer
-     * to end.
-     *
-     * Method is deprecated. Initialize Timer inline with the constructor that accepts three parameters
-     * @param timeLeftInMillis the time in millis for which the timer should run.
-     */
-    @Deprecated
-    private void setCountDownTimer(long timeLeftInMillis) {
-        countDownTimer = new LinearTimerCountDownTimer(timeLeftInMillis, updateInterval) {
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timerListener.timerTick(millisUntilFinished);
-            }
-
-            @Override
-            public void onFinish() {
-                if(intStatusCode != LinearTimerStates.PAUSED.getStaus())
-                    timerListener.timerTick(0);
-            }
-        };
-
-        countDownTimer.start();
-    }
-
-    /**
-     * Method to setup the countup timer which returns the time elapsed since the timer has started.
-     * The timer stops when it has run for the required duration.
-     *
-     * Method is deprecated. Initialize Timer inline with the constructor that accepts three parameters
-     *
-     * @param runningTimeInMilliseconds the time in millis for which the timer should run.
-     */
-    @Deprecated
-    private void setCountUpTimer(final long runningTimeInMilliseconds) {
-        countUpTimer = new LinearTimerCountUpTimer(runningTimeInMilliseconds, updateInterval) {
-
-            @Override
-            public void onTick(long elapsedTime) {
-                timerListener.timerTick(elapsedTime);
-            }
-
-            @Override
-            public void onFinish() {
-                timerListener.timerTick(runningTimeInMilliseconds);
-            }
-        };
-
-        countUpTimer.start();
     }
 
     /**
