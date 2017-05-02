@@ -31,6 +31,8 @@ Download the demo app -
 
 Linear Timer follows the [Semantic Versioning System](http://semver.org/).
 
+Summery - `MAJOR.MINOR.PATCH`
+
 ## Setup
 
 
