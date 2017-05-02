@@ -41,7 +41,7 @@ public class LinearTimerCountDownTimer extends CountDownTimer {
      * Returns the milliseconds remaining before the counter finishes itself
      * @return millisLeftUntilFinished
      */
-    long getMillisLeftUntilFinished() {
+    long getTimeLeft() {
         return millisLeftUntilFinished;
     }
 }

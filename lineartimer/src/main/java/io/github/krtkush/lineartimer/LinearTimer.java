@@ -159,7 +159,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
                 // the ending angle and duration is set to pending time left from the timer.
                 arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle, this);
                 if (countType == COUNT_DOWN_TIMER)
-                    arcProgressAnimation.setDuration(countDownTimer.getMillisLeftUntilFinished());
+                    arcProgressAnimation.setDuration(countDownTimer.getTimeLeft());
                 else if (countType == COUNT_UP_TIMER)
                     arcProgressAnimation.setDuration(countUpTimer.getTimeLeft());
 
@@ -167,7 +167,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
                 // and start.
                 if (countType == COUNT_DOWN_TIMER) {
                     countDownTimer = new LinearTimerCountDownTimer(
-                            countDownTimer.getMillisLeftUntilFinished(),
+                            countDownTimer.getTimeLeft(),
                             updateInterval,
                             timerListener);
                     countDownTimer.start();
