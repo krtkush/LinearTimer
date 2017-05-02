@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
         linearTimer = new LinearTimer.Builder()
                 .linearTimerView(linearTimerView)
                 .duration(duration)
+                .timerListener(this)
+                .getCountUpdate(LinearTimer.COUNT_DOWN_TIMER, 1000)
                 .build();
 
         // Start the timer.

@@ -7,14 +7,12 @@ public class LinearTimerCountUpTimer extends CountUpTimer {
 
     private LinearTimer.TimerListener timerListener;
 
-    public LinearTimerCountUpTimer(long duration, long interval) {
-        super(duration, interval);
-    }
-
     public LinearTimerCountUpTimer(long timerDuration,
                                    long countUpInterval, LinearTimer.TimerListener timerListener) {
         super(timerDuration, countUpInterval);
         this.timerListener = timerListener;
+        // Reduce the time duration by 1000 millis so as to make sure that tha animation and
+        // counter finish at the same time.
         this.timerDuration = timerDuration;
     }
 

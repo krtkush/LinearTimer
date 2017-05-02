@@ -9,16 +9,12 @@ public class LinearTimerCountDownTimer extends CountDownTimer {
     private LinearTimer.TimerListener timerListener;
 
     /**
-     * @param millisInFuture    The number of millis in the future from the call
+     * @param millisLeftUntilFinished    The number of millis in the future from the call
      *                          to {@link #start()} until the countdown is done and {@link #onFinish()}
      *                          is called.
      * @param countDownInterval The interval along the way to receive
      *                          {@link #onTick(long)} callbacks.
      */
-    public LinearTimerCountDownTimer(long millisInFuture, long countDownInterval) {
-        super(millisInFuture, countDownInterval);
-    }
-
     public LinearTimerCountDownTimer(long millisLeftUntilFinished,
                                      long countDownInterval, LinearTimer.TimerListener timerListener) {
         super(millisLeftUntilFinished, countDownInterval);

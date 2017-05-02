@@ -174,11 +174,8 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
                 } else if (countType == COUNT_UP_TIMER)
                     countUpTimer.resume();
 
-                // The LinearTimerView's prefill is reset to as it was when it was paused.
-                linearTimerView.setAnimation(arcProgressAnimation);
-
                 // Start animation again.
-                arcProgressAnimation.start();
+                linearTimerView.startAnimation(arcProgressAnimation);
 
                 // Store the current status code in intStatusCode integer
                 intStatusCode = LinearTimerStates.ACTIVE.getStaus();

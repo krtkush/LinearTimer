@@ -39,9 +39,7 @@ public abstract class CountUpTimer {
     private long base;
 
     public CountUpTimer(long duration, long interval) {
-        // Reduce the time duration by 1000 millis so as to make sure that tha animation and
-        // counter finish at the same time.
-        this.duration = duration - 1000;
+        this.duration = duration;
         this.interval = interval;
     }
 
