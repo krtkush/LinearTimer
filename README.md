@@ -52,7 +52,7 @@ And, in your app's `build.gradle` add this under `dependencies` block -
 
     compile 'com.github.krtkush:LinearTimer:<version_available_on_jitpack>'
     
-example - `compile 'com.github.krtkush:LinearTimer:v2.1.0'`
+example - `compile 'com.github.krtkush:LinearTimer:v2.1.1'`
 
 ## Usage
 
@@ -147,7 +147,11 @@ List of methods available to control the timer -
 |5.|[restartTimer()](https://github.com/krtkush/LinearTimer/wiki/Usage#restart)|Restart the timer from the starting angle; the timer will start again.|None|
 |5.|[getState()](https://github.com/krtkush/LinearTimer/wiki/Usage#timer-states)|Get current state of the timer.|None|
 
-For detailed documentation and on how to customise and use LinearTimer please [refer to the wiki](https://github.com/krtkush/LinearTimer/wiki).
+For detailed documentation and on how to customise and use LinearTimer please [refer to the wiki](https://github.com/krtkush/LinearTimer/wiki). 
+
+Refer [here](https://jitpack.io/com/github/krtkush/lineartimer/v2.1.1/javadoc/) for Java Docs. 
+
+General URL for Java Docs is `https://jitpack.io/com/github/krtkush/lineartimer/<insert_choice_of_version>/javadoc/`
 
 ## Contribution
 
