@@ -21,13 +21,15 @@ public class LinearTimerCountUpTimer extends CountUpTimer {
     @Override
     public void onTick(long elapsedTime) {
         this.timeLeft = timerDuration - elapsedTime;
-        timerListener.timerTick(elapsedTime);
+        if (timerListener != null)
+            timerListener.timerTick(elapsedTime);
     }
 
     @Override
     public void onFinish() {
         if (LinearTimer.intStatusCode != LinearTimerStates.PAUSED.getStaus())
-            timerListener.timerTick(timerDuration);
+            if (timerListener != null)
+                timerListener.timerTick(timerDuration);
     }
 
     /**
