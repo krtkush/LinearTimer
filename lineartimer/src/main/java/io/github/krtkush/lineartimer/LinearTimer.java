@@ -379,7 +379,10 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         private int endingAngle = 360;
         private long totalDuration = -1;
         private long timeElapsed = 0;
-        private int countType = COUNT_UP_TIMER;
+        private int countType = COUNT_UP_TIMER; // Even if the user does not need the update,
+                                                // we need to keep track of time elapsed, left etc.
+                                                // Specially for the case of resuming the timer.
+                                                // Hence, we default to COUNT_UP_TIMER.
         private long updateInterval = 1000;
 
         /**
