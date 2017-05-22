@@ -149,7 +149,7 @@ List of methods available to control the timer -
 
 For detailed documentation and on how to customise and use LinearTimer please [refer to the wiki](https://github.com/krtkush/LinearTimer/wiki). 
 
-Refer [here](https://jitpack.io/com/github/krtkush/lineartimer/v2.1.1/javadoc/) for Java Docs. General URL for Java Docs is `https://jitpack.io/com/github/krtkush/lineartimer/<insert_choice_of_version>/javadoc/`
+Refer [here](https://jitpack.io/com/github/krtkush/lineartimer/v2.1.1/javadoc/) for Java Docs. General URL for Java Docs is `https://jitpack.io/com/github/krtkush/lineartimer/<insert_version_of_choice>/javadoc/`
 
 ## Contribution
 
