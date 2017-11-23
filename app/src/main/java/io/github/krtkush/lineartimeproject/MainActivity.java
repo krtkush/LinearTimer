@@ -18,18 +18,18 @@ import io.github.krtkush.lineartimer.LinearTimerView;
 
 public class MainActivity extends AppCompatActivity implements LinearTimer.TimerListener {
 
-    private LinearTimerView linearTimerView;
     private LinearTimer linearTimer;
     private TextView time;
-    private long duration = 10 * 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
-        time = (TextView) findViewById(R.id.time);
+        LinearTimerView linearTimerView = findViewById(R.id.linearTimer);
+        time = findViewById(R.id.time);
+
+        long duration = 10 * 1000;
 
         // Assign attribute values to the view programmatically
         // This will override the attributes set via the XML.
