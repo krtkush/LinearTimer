@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    compileSdkVersion 27
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "io.github.krtkush.lineartimeproject"
         minSdkVersion 14
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -26,7 +26,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile project(':lineartimer')
-    compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.android.support.constraint:constraint-layout:+'
+    implementation 'com.android.support:appcompat-v7:27.0.1'
     testCompile 'junit:junit:4.12'
 }
