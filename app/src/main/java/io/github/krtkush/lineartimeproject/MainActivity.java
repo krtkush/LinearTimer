@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
 
     private LinearTimer linearTimer;
     private TextView time;
+    private long duration = 10 * 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
