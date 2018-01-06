@@ -73,7 +73,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
             linearTimerView.setPreFillAngle(preFillAngle);
 
             // Store the current status code in intStatusCode integer
-            intStatusCode = LinearTimerStates.INITIALIZED.getStaus();
+            intStatusCode = LinearTimerStates.INITIALIZED.getStatus();
 
             // If the user wants to show the progress in counter clock wise manner,
             // we flip the view on its Y-Axis and let it function as is.
@@ -102,9 +102,9 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     public void startTimer() {
 
         if (basicParametersCheck()) {
-            if (intStatusCode == LinearTimerStates.INITIALIZED.getStaus()) {
+            if (intStatusCode == LinearTimerStates.INITIALIZED.getStatus()) {
                 // Store the current status code in intStatusCode integer
-                intStatusCode = LinearTimerStates.ACTIVE.getStaus();
+                intStatusCode = LinearTimerStates.ACTIVE.getStatus();
                 arcProgressAnimation = new ArcProgressAnimation(linearTimerView, endingAngle, this);
                 arcProgressAnimation.setDuration(animationDuration);
                 linearTimerView.startAnimation(arcProgressAnimation);
@@ -124,10 +124,10 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
     public void pauseTimer() throws IllegalStateException {
         if (basicParametersCheck()) {
             // Timer may be paused only in active state.
-            if (intStatusCode == LinearTimerStates.ACTIVE.getStaus()) {
+            if (intStatusCode == LinearTimerStates.ACTIVE.getStatus()) {
 
                 // Store the current status code in intStatusCode integer.
-                intStatusCode = LinearTimerStates.PAUSED.getStaus();
+                intStatusCode = LinearTimerStates.PAUSED.getStatus();
 
                 // Clear animations off of linearTimerView, set prefillAngle to current
                 // state and refresh view.
@@ -152,7 +152,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      */
     public void resumeTimer() throws IllegalStateException {
         if (basicParametersCheck()) {
-            if (intStatusCode == LinearTimerStates.PAUSED.getStaus()) {
+            if (intStatusCode == LinearTimerStates.PAUSED.getStatus()) {
 
                 // Reinitialize the animations as it may not be simply continued.
                 // The animation is reinitialized with the linearTimerView,
@@ -178,7 +178,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
                 linearTimerView.startAnimation(arcProgressAnimation);
 
                 // Store the current status code in intStatusCode integer
-                intStatusCode = LinearTimerStates.ACTIVE.getStaus();
+                intStatusCode = LinearTimerStates.ACTIVE.getStatus();
             } else
                 throw new IllegalStateException("LinearTimer is not in paused state right now.");
         }
@@ -191,7 +191,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         if (basicParametersCheck()) {
             if (arcProgressAnimation != null) {
                 // Store the current status code in intStatusCode integer
-                intStatusCode = LinearTimerStates.ACTIVE.getStaus();
+                intStatusCode = LinearTimerStates.ACTIVE.getStatus();
 
                 // Reset the pre filling angle as passed by user during initialization
                 linearTimerView.setPreFillAngle(preFillAngle);
@@ -213,10 +213,10 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
      */
     public void resetTimer() {
         if (basicParametersCheck()) {
-            if (intStatusCode == LinearTimerStates.PAUSED.getStaus()
-                    || intStatusCode == LinearTimerStates.FINISHED.getStaus()) {
+            if (intStatusCode == LinearTimerStates.PAUSED.getStatus()
+                    || intStatusCode == LinearTimerStates.FINISHED.getStatus()) {
                 //Store the current status code in intStatusCode integer
-                intStatusCode = LinearTimerStates.INITIALIZED.getStaus();
+                intStatusCode = LinearTimerStates.INITIALIZED.getStatus();
 
                 //Cancel the circle animation
                 arcProgressAnimation.cancel();
@@ -270,7 +270,7 @@ public class LinearTimer implements ArcProgressAnimation.TimerListener {
         try {
             if (listenerCheck()) {
                 // Store the current status code in intStatusCode integer
-                intStatusCode = LinearTimerStates.FINISHED.getStaus();
+                intStatusCode = LinearTimerStates.FINISHED.getStatus();
                 timerListener.animationComplete();
             }
         } catch (LinearTimerListenerMissingException ex) {
