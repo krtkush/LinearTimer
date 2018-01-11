@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements LinearTimer.Timer
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LinearTimerView linearTimerView = findViewById(R.id.linearTimer);
+        LinearTimerView linearTimerView = findViewById(R.id.linearTimerView);
         time = findViewById(R.id.time);
 
         long duration = 10 * 1000;
