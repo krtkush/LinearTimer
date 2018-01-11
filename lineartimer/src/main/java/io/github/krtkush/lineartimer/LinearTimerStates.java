@@ -49,7 +49,7 @@ public enum LinearTimerStates {
      * A method to return the affixed integer representation of the Status codes.
      * @return An integer that represents the LinearTimer current status
      */
-    public int getStaus() {
+    public int getStatus() {
         return intStatusCode;
     }
 }

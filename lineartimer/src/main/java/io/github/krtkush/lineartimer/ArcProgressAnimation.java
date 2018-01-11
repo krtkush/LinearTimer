@@ -13,6 +13,7 @@ public class ArcProgressAnimation extends Animation {
     private float startingAngle;
     private float endingAngle;
     private TimerListener timerListener;
+    private boolean isFinished;
 
     /**
      * Instantiates a new Arc progress animation.
@@ -31,16 +32,18 @@ public class ArcProgressAnimation extends Animation {
 
     @Override
     protected void applyTransformation(float interpolatedTime, Transformation transformation) {
-
         float finalAngle = startingAngle + ((endingAngle - startingAngle) * interpolatedTime);
-
         linearTimerView.setPreFillAngle(finalAngle);
         linearTimerView.requestLayout();
 
         // If interpolatedTime = 0.0 -> Animation has started.
         // If interpolatedTime = 1.0 -> Animation has completed.
-        if(interpolatedTime == 1.0)
-            timerListener.animationComplete();
+        if(interpolatedTime == 1.0) {
+            if(isFinished)
+                timerListener.animationComplete();
+            isFinished = true;
+        }
+
     }
 
     /**
