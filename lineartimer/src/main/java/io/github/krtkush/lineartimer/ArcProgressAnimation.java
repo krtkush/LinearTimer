@@ -38,8 +38,9 @@ public class ArcProgressAnimation extends Animation {
 
         // If interpolatedTime = 0.0 -> Animation has started.
         // If interpolatedTime = 1.0 -> Animation has completed.
-        if(interpolatedTime == 1.0){
-            if(isFinished) timerListener.animationComplete();
+        if(interpolatedTime == 1.0) {
+            if(isFinished)
+                timerListener.animationComplete();
             isFinished = true;
         }
 
