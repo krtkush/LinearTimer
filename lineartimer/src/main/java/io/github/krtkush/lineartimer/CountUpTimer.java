@@ -101,7 +101,7 @@ public abstract class CountUpTimer {
                 }
 
                 // If condition set up to hinder onTick callBacks being sent if
-                // elapsedtime somehow is more than the duration.
+                // elapsedTime somehow is more than the duration.
                 // Stop the timer if it has run for the required duration.
                 if(elapsedTime >= duration) {
                     stop();
